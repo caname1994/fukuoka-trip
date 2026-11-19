@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFCF6">
+<title>福岡周邊之旅 2026｜12/13 – 12/18</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFCF6; --ink:#3E3A39;
+  --coral:#F2A497; --yama:#F6D27A; --mizu:#A8D3E6; --take:#B9DAA5;
+  --coral-l:#FCE5E0; --yama-l:#FDF2D3; --mizu-l:#E2F1F7; --take-l:#E8F3E1; --fuji-l:#ECE6F5; --fuji:#CFC3E8;
+  --line:3px solid var(--ink);
+  --r:24px; --nav-h:60px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Huninn","PingFang TC","Microsoft JhengHei",sans-serif;font-size:16px;line-height:1.6;letter-spacing:.02em}
+a{color:inherit}
+button{font-family:inherit;color:inherit}
+svg{display:block}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+section{scroll-margin-top:calc(var(--nav-h) + 12px);padding:28px 0 8px}
+
+/* ---------- 頂端固定選單 ---------- */
+.nav{position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:50;background:var(--paper);border-bottom:var(--line);display:flex;align-items:center;gap:8px;padding:0 10px}
+.brand{display:flex;align-items:center;gap:6px;font-size:17px;white-space:nowrap;text-decoration:none;flex:none}
+.brand svg{width:32px;height:32px}
+.nav-links{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;padding:4px 2px;-webkit-overflow-scrolling:touch}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{flex:none;text-decoration:none;font-size:14px;padding:4px 12px;border:2px solid var(--ink);border-radius:999px;background:var(--paper)}
+.nav-links a.on{background:var(--yama)}
+.motion-btn{flex:none;width:40px;height:40px;border:2px solid var(--ink);border-radius:50%;background:var(--mizu-l);cursor:pointer;display:grid;place-items:center;padding:0}
+.motion-btn svg{width:22px;height:22px}
+html.rm .motion-btn{background:var(--paper)}
+main{padding-top:var(--nav-h)}
+
+/* ---------- 共用 ---------- */
+.card{background:var(--paper);border:var(--line);border-radius:var(--r);box-shadow:4px 4px 0 var(--ink)}
+.sec-title{display:flex;align-items:center;gap:10px;font-size:22px;margin:0 0 14px;font-weight:normal}
+.sec-title .bubble{width:40px;height:40px;border:var(--line);border-radius:14px;display:grid;place-items:center;flex:none}
+.sec-title .bubble svg{width:24px;height:24px}
+.muted{opacity:.75;font-size:14px}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:13px;padding:1px 10px;border:2px solid var(--ink);border-radius:999px;background:var(--paper);white-space:nowrap}
+
+/* ---------- 首頁 ---------- */
+.hero{padding-top:18px}
+.hero-card{overflow:hidden;background:var(--mizu-l)}
+.hero-art{width:100%;height:auto;border-bottom:var(--line)}
+.hero-body{padding:18px 18px 20px;background:var(--paper);text-align:center}
+.hero-kicker{display:inline-block;font-size:13px;padding:2px 12px;border:2px solid var(--ink);border-radius:999px;background:var(--take)}
+.hero h1{font-size:30px;margin:10px 0 2px;font-weight:normal;line-height:1.3}
+.hero .dates{font-size:15px;margin:0 0 14px}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px;margin:0 auto}
+.cd-box{border:var(--line);border-radius:18px;padding:8px 0 6px;background:var(--yama-l)}
+.cd-box:nth-child(2){background:var(--coral-l)}
+.cd-box:nth-child(3){background:var(--mizu-l)}
+.cd-box:nth-child(4){background:var(--take-l)}
+.cd-num{font-size:28px;line-height:1.1;font-variant-numeric:tabular-nums}
+.cd-lbl{font-size:12px}
+.cd-msg{margin:12px 0 0;font-size:15px}
+
+/* ---------- 航班 ---------- */
+.flights{display:grid;gap:16px}
+.flight{padding:16px 16px 14px;position:relative;overflow:hidden}
+.flight.out{background:var(--mizu-l)}
+.flight.back{background:var(--coral-l)}
+.flight-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.flight-no{font-size:20px}
+.flight-route{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;margin:12px 0 4px}
+.port{text-align:center}
+.port b{display:block;font-weight:normal;font-size:34px;line-height:1}
+.port span{font-size:13px}
+.port .t{display:block;font-size:20px;margin-top:4px}
+.flight-path{width:90px;height:40px}
+.ticket-cut{border-top:3px dashed var(--ink);margin:10px -16px 8px;opacity:.5}
+.flight-foot{display:flex;justify-content:space-between;font-size:14px;flex-wrap:wrap;gap:4px}
+
+/* ---------- 每日行程 ---------- */
+.day-tabs{position:sticky;top:var(--nav-h);z-index:20;background:var(--paper);padding:10px 0 12px;margin:0 -16px;padding-left:16px;padding-right:16px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;border-bottom:2px dashed rgba(62,58,57,.35)}
+.day-tabs::-webkit-scrollbar{display:none}
+.day-tab{flex:none;min-width:68px;border:var(--line);border-radius:18px;background:var(--paper);padding:6px 8px;cursor:pointer;text-align:center;line-height:1.25}
+.day-tab .d{display:block;font-size:12px}
+.day-tab .n{display:block;font-size:20px}
+.day-tab .w{display:block;font-size:12px}
+.day-tab[aria-selected="true"]{background:var(--yama);box-shadow:3px 3px 0 var(--ink);transform:translateY(-2px)}
+.day-tab:focus-visible,.nav-links a:focus-visible,.motion-btn:focus-visible,.check input:focus-visible+.box{outline:3px solid var(--coral);outline-offset:2px}
+
+.day-panel{margin-top:16px}
+.day-head{overflow:hidden;margin-bottom:18px}
+.day-art{width:100%;height:auto;border-bottom:var(--line)}
+.day-head-body{padding:12px 16px 14px}
+.day-head h3{margin:0;font-size:22px;font-weight:normal}
+.day-head p{margin:2px 0 0;font-size:14px}
+
+.timeline{list-style:none;margin:0;padding:0;position:relative}
+.timeline::before{content:"";position:absolute;left:62px;top:6px;bottom:6px;border-left:3px dashed var(--ink);opacity:.45}
+.tl{display:grid;grid-template-columns:52px 22px 1fr;gap:0 8px;margin-bottom:14px;position:relative}
+.tl-time{text-align:right;font-size:15px;line-height:1.2;padding-top:10px;font-variant-numeric:tabular-nums}
+.tl-time small{display:block;font-size:12px;opacity:.7;margin-top:2px}
+.tl-dot{width:20px;height:20px;border:var(--line);border-radius:50%;margin-top:10px;background:var(--paper);z-index:1}
+.k-move .tl-dot{background:var(--mizu)}
+.k-meal .tl-dot{background:var(--coral)}
+.k-sight .tl-dot{background:var(--take)}
+.k-shop .tl-dot{background:var(--yama)}
+.tl-card{border:var(--line);border-radius:20px;padding:10px 12px 10px;background:var(--paper)}
+.k-sight .tl-card{background:var(--take-l)}
+.k-meal .tl-card{background:var(--coral-l)}
+.k-shop .tl-card{background:var(--yama-l)}
+.tl.must .tl-card{box-shadow:4px 4px 0 var(--ink)}
+.tl-title{display:flex;align-items:flex-start;gap:6px;justify-content:space-between}
+.tl-title h4{margin:0;font-size:16px;font-weight:normal;line-height:1.45}
+.must-badge{flex:none;display:inline-flex;align-items:center;gap:3px;font-size:12px;padding:1px 8px 1px 6px;border:2px solid var(--ink);border-radius:999px;background:var(--coral);white-space:nowrap}
+.must-badge svg{width:14px;height:14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;padding:1px 9px 1px 4px;border:2px solid var(--ink);border-radius:999px;line-height:1.5}
+.tag svg{width:18px;height:18px;flex:none}
+.t-plane{background:var(--mizu)}
+.t-bus{background:var(--take)}
+.t-subway{background:var(--yama)}
+.t-nishi{background:var(--coral)}
+.t-jr{background:var(--fuji)}
+.t-walk{background:var(--paper)}
+.t-cable{background:var(--take-l)}
+.t-boat{background:var(--mizu-l)}
+.tag.cost{background:var(--paper);padding-left:9px}
+.tl-note{margin:6px 0 0;font-size:13.5px;line-height:1.55}
+.tl-list{margin:6px 0 0;padding:0;list-style:none;font-size:13.5px}
+.tl-list li{position:relative;padding-left:16px;margin:3px 0;line-height:1.5}
+.tl-list li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;border:2px solid var(--ink);border-radius:50%;background:var(--paper)}
+details.alt{margin-top:6px;font-size:13px}
+details.alt summary{cursor:pointer;display:inline-block;padding:0 10px;border:2px dashed var(--ink);border-radius:999px;list-style:none}
+details.alt summary::-webkit-details-marker{display:none}
+details.alt[open] summary{background:var(--mizu-l)}
+details.alt ul{margin:6px 0 0;padding-left:18px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12.5px;margin:0 0 14px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:13px;height:13px;border:2px solid var(--ink);border-radius:50%;display:inline-block}
+
+/* ---------- 清單 ---------- */
+.list-card{padding:14px 14px 10px;margin-bottom:16px}
+.list-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.list-head h3{margin:0;font-size:18px;font-weight:normal}
+.progress{height:14px;border:2px solid var(--ink);border-radius:999px;background:var(--paper);overflow:hidden;margin:4px 0 10px}
+.progress i{display:block;height:100%;background:var(--take);border-right:2px solid var(--ink);width:0;transition:width .4s}
+.progress i[style*="width: 0%"]{border-right:none}
+.group-title{font-size:14px;margin:10px 0 4px;display:flex;align-items:center;gap:6px}
+.group-title::before{content:"";width:10px;height:10px;border:2px solid var(--ink);border-radius:3px;background:var(--yama)}
+.checks{list-style:none;margin:0;padding:0}
+.check{display:flex;align-items:flex-start;gap:10px;padding:7px 4px;border-bottom:2px dotted rgba(62,58,57,.25);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.checks li:last-child .check{border-bottom:none}
+.check input{position:absolute;opacity:0;width:1px;height:1px}
+.check .box{flex:none;width:24px;height:24px;border:var(--line);border-radius:8px;background:var(--paper);display:grid;place-items:center;margin-top:1px}
+.check .box svg{width:16px;height:16px;opacity:0;transform:scale(.3);transition:transform .25s cubic-bezier(.3,1.6,.5,1),opacity .2s}
+.check input:checked+.box{background:var(--take)}
+.check input:checked+.box svg{opacity:1;transform:scale(1)}
+.check .txt{font-size:15px;line-height:1.45}
+.check .txt small{display:block;font-size:12.5px;opacity:.72}
+.check input:checked~.txt{text-decoration:line-through;text-decoration-thickness:2px;opacity:.55}
+.reset{font-size:12.5px;border:2px solid var(--ink);border-radius:999px;background:var(--paper);padding:2px 10px;cursor:pointer}
+
+/* ---------- 住宿 ---------- */
+.hotel{overflow:hidden;background:var(--take-l)}
+.hotel-art{width:100%;height:auto;border-bottom:var(--line)}
+.hotel-body{padding:14px 16px 16px;background:var(--paper)}
+.hotel-body h3{margin:0 0 4px;font-size:19px;font-weight:normal;line-height:1.35}
+.info-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14.5px;margin:10px 0 12px}
+.info-grid dt{opacity:.7}
+.info-grid dd{margin:0}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:var(--line);border-radius:999px;padding:6px 14px;font-size:14px;background:var(--yama);box-shadow:3px 3px 0 var(--ink);cursor:pointer}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.blue{background:var(--mizu)}
+.station-map{margin-top:16px;padding:12px}
+.station-map h3{margin:0 0 8px;font-size:16px;font-weight:normal}
+
+footer{text-align:center;font-size:12.5px;padding:24px 16px 40px;opacity:.75}
+
+/* ---------- 動畫 ---------- */
+.float{animation:float 4s ease-in-out infinite}
+.float2{animation:float 5.5s ease-in-out infinite -1.5s}
+.bob{animation:bob 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+.drift{animation:drift 9s ease-in-out infinite alternate}
+.drift2{animation:drift 12s ease-in-out infinite alternate-reverse}
+.spin{animation:spin 24s linear infinite;transform-box:fill-box;transform-origin:center}
+.sway{animation:sway 4.5s ease-in-out infinite;transform-box:fill-box;transform-origin:0% 0%}
+.sway-r{animation:sway 5s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 0%}
+.twinkle{animation:twinkle 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.twinkle.d2{animation-delay:-.8s}.twinkle.d3{animation-delay:-1.6s}
+.wave{animation:wave 5s linear infinite}
+.cable{animation:cable 7s ease-in-out infinite alternate}
+.lift-l{animation:liftL 6s ease-in-out infinite;transform-box:fill-box;transform-origin:0% 100%}
+.lift-r{animation:liftR 6s ease-in-out infinite;transform-box:fill-box;transform-origin:100% 100%}
+.hop{animation:hop 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+.hop.d2{animation-delay:-.9s}.hop.d3{animation-delay:-1.7s}
+.spray{animation:spray 2.2s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(2px) rotate(1.5deg)}}
+@keyframes drift{from{transform:translateX(-10px)}to{transform:translateX(14px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2.5deg)}}
+@keyframes twinkle{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.6);opacity:.5}}
+@keyframes wave{from{transform:translateX(0)}to{transform:translateX(-40px)}}
+@keyframes cable{from{transform:translate(0,0)}to{transform:translate(-46px,32px)}}
+@keyframes liftL{0%,30%,100%{transform:rotate(0)}55%,75%{transform:rotate(-28deg)}}
+@keyframes liftR{0%,30%,100%{transform:rotate(0)}55%,75%{transform:rotate(28deg)}}
+@keyframes hop{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+@keyframes spray{0%,100%{transform:scaleY(.85)}50%{transform:scaleY(1.08)}}
+
+/* 切換日期彈跳 */
+.bounce-in{animation:bounceIn .6s cubic-bezier(.28,1.4,.5,1) both}
+.tl.bounce-in{animation-duration:.55s}
+.day-tab.boing{animation:boing .45s cubic-bezier(.3,1.7,.5,1)}
+@keyframes bounceIn{0%{opacity:0;transform:translateY(18px) scale(.96)}60%{opacity:1;transform:translateY(-6px) scale(1.01)}80%{transform:translateY(2px)}100%{opacity:1;transform:none}}
+@keyframes boing{0%{transform:translateY(-2px) scale(1)}40%{transform:translateY(-6px) scale(1.08)}100%{transform:translateY(-2px) scale(1)}}
+
+/* ---------- 記帳 ---------- */
+.exp-total{padding:14px 16px;background:var(--yama-l);margin-bottom:16px}
+.exp-total .big{font-size:32px;line-height:1.15;font-variant-numeric:tabular-nums}
+.exp-total .hkd{font-size:15px;opacity:.8}
+.rate-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13.5px;margin-top:8px}
+.rate-row input{width:84px}
+.cat-bars{margin-top:12px;display:grid;gap:6px}
+.cat-bar{display:grid;grid-template-columns:44px 1fr auto;gap:8px;align-items:center;font-size:13px}
+.cat-bar .track{height:14px;border:2px solid var(--ink);border-radius:999px;background:var(--paper);overflow:hidden}
+.cat-bar .track i{display:block;height:100%;border-right:2px solid var(--ink)}
+.cat-bar .track i[data-z]{border-right:none}
+.cat-bar b{font-weight:normal;font-variant-numeric:tabular-nums}
+
+.exp-card{padding:14px 14px 16px;margin-bottom:16px}
+.exp-card h3{margin:0 0 10px;font-size:18px;font-weight:normal;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.field{display:grid;gap:3px;margin-bottom:10px;font-size:13.5px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.amt-row{display:grid;grid-template-columns:1fr 92px;gap:8px}
+.exp-card input[type=text],.exp-card input[type=number],.exp-card select,.exp-total input,.exp-card textarea{
+  width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:2px solid var(--ink);border-radius:12px;padding:7px 10px;min-height:42px;-webkit-appearance:none;appearance:none}
+.exp-card select{background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:28px}
+.exp-card textarea{min-height:80px;font-size:13px;word-break:break-all}
+.exp-card input:focus,.exp-card select:focus,.exp-card textarea:focus,.exp-total input:focus{outline:3px solid var(--coral);outline-offset:1px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{position:relative}
+.pill input{position:absolute;opacity:0;width:1px;height:1px}
+.pill span{display:inline-block;padding:4px 12px;border:2px solid var(--ink);border-radius:999px;background:var(--paper);font-size:14px;cursor:pointer;user-select:none}
+.pill input:checked+span{background:var(--take)}
+.pill input:focus-visible+span{outline:3px solid var(--coral);outline-offset:2px}
+.cat-pills .pill input:checked+span{background:var(--c)}
+.form-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.btn.ghost{background:var(--paper)}
+.btn.pink{background:var(--coral)}
+.btn.green{background:var(--take)}
+.btn[hidden]{display:none}
+
+.people{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.person{display:inline-flex;align-items:center;gap:4px;padding:3px 4px 3px 12px;border:2px solid var(--ink);border-radius:999px;background:var(--mizu-l);font-size:14px}
+.person button{width:24px;height:24px;border:2px solid var(--ink);border-radius:50%;background:var(--paper);cursor:pointer;line-height:1;padding:0;font-size:14px}
+.add-person{display:grid;grid-template-columns:1fr auto;gap:8px}
+
+.exp-day{margin:14px 0 6px;display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.exp-day span:last-child{font-variant-numeric:tabular-nums}
+.exp-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.exp-item{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;border:2px solid var(--ink);border-radius:16px;padding:8px 10px;background:var(--paper);cursor:pointer;width:100%;text-align:left;font:inherit}
+.exp-item:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.exp-item .ic{width:36px;height:36px;border:2px solid var(--ink);border-radius:12px;display:grid;place-items:center;font-size:12px;line-height:1}
+.exp-item .nm{font-size:15px;line-height:1.35}
+.exp-item .nm small{display:block;font-size:12px;opacity:.72}
+.exp-item .am{text-align:right;font-variant-numeric:tabular-nums;font-size:15px;line-height:1.3}
+.exp-item .am small{display:block;font-size:12px;opacity:.72}
+.exp-item.editing{background:var(--yama-l)}
+.empty{text-align:center;padding:16px 8px;font-size:14px;opacity:.75;border:2px dashed var(--ink);border-radius:16px}
+
+.settle-table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;margin-bottom:10px}
+.settle-table th,.settle-table td{padding:6px 6px;border-bottom:2px dotted rgba(62,58,57,.25);text-align:right;font-variant-numeric:tabular-nums;font-weight:normal}
+.settle-table th:first-child,.settle-table td:first-child{text-align:left}
+.settle-table thead th{font-size:12.5px;opacity:.75}
+.pos{color:#3E7A33}.neg{color:#B4493A}
+.transfer{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 10px;border:2px solid var(--ink);border-radius:14px;background:var(--coral-l);margin-top:6px;font-size:14.5px}
+.transfer b{font-weight:normal;margin-left:auto;font-variant-numeric:tabular-nums}
+.share-note{font-size:13px;line-height:1.55;margin:8px 0 0;padding:8px 10px;border:2px dashed var(--ink);border-radius:12px;background:var(--paper)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);padding:8px 16px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:80;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.exp-total .rate-row input{width:96px;min-height:34px;padding:4px 8px}
+.pop{animation:bounceIn .5s cubic-bezier(.28,1.4,.5,1) both}
+
+
+/* 減少動態效果：系統設定 + 頁面開關 */
+@media (prefers-reduced-motion: reduce){
+  html:not(.motion-on){scroll-behavior:auto}
+  html:not(.motion-on) *,html:not(.motion-on) *::before,html:not(.motion-on) *::after{animation:none!important;transition:none!important}
+}
+html.rm{scroll-behavior:auto}
+html.rm *,html.rm *::before,html.rm *::after{animation:none!important;transition:none!important}
+
+@media (min-width:640px){
+  .flights{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:36px}
+  .lists-2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- 小圖示 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path d="M3 13.5 21 8.5c1.2-.3 1.8 1.3.7 1.9L10 16.5l-4.5.8L3 13.5Z" fill="#fff" stroke="#3E3A39" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 11.5 7.5 5.5l2.3-.6 4.8 5" fill="#F2A497" stroke="#3E3A39" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="14" rx="3.5" fill="#fff" stroke="#3E3A39" stroke-width="1.8"/><rect x="6.5" y="7" width="11" height="5" rx="1.2" fill="#A8D3E6" stroke="#3E3A39" stroke-width="1.5"/><circle cx="8" cy="19.5" r="1.8" fill="#3E3A39"/><circle cx="16" cy="19.5" r="1.8" fill="#3E3A39"/></symbol>
+    <symbol id="i-subway" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="15" rx="5" fill="#fff" stroke="#3E3A39" stroke-width="1.8"/><path d="M7.5 9h9" stroke="#3E3A39" stroke-width="1.8"/><circle cx="9" cy="14" r="1.3" fill="#3E3A39"/><circle cx="15" cy="14" r="1.3" fill="#3E3A39"/><path d="m8 18.5-2 3M16 18.5l2 3" stroke="#3E3A39" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-train" viewBox="0 0 24 24"><path d="M4 16V9c0-3 2.5-5 5.5-5h5C18 4 20 6.5 20 9v7Z" fill="#fff" stroke="#3E3A39" stroke-width="1.8" stroke-linejoin="round"/><path d="M6.5 8.5h11v3h-11z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="1.5"/><path d="M3 19h18" stroke="#3E3A39" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="17" r="1.3" fill="#3E3A39"/><circle cx="16" cy="17" r="1.3" fill="#3E3A39"/></symbol>
+    <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13" cy="4.5" r="2.2" fill="#F6D27A" stroke="#3E3A39" stroke-width="1.6"/><path d="m12.5 8-2.5 6 3.5 3-1 4.5M11 9.5l-3.5 2M12.5 9l3.5 3M10 14l-3 6.5" fill="none" stroke="#3E3A39" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cable" viewBox="0 0 24 24"><path d="M2 4 22 9" stroke="#3E3A39" stroke-width="1.6" stroke-linecap="round"/><path d="M12 6.5v4" stroke="#3E3A39" stroke-width="1.8"/><rect x="6" y="10.5" width="12" height="10" rx="3" fill="#fff" stroke="#3E3A39" stroke-width="1.8"/><rect x="8.3" y="13" width="7.4" height="3.5" rx="1" fill="#A8D3E6" stroke="#3E3A39" stroke-width="1.4"/></symbol>
+    <symbol id="i-boat" viewBox="0 0 24 24"><path d="M2.5 14h19l-2.5 4.5H5Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 13.5V9" stroke="#3E3A39" stroke-width="1.8"/><path d="m7.5 9 3.5-4.5L14.5 9Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="1.6" stroke-linejoin="round"/><path d="m16 4-1.5 9.5" stroke="#3E3A39" stroke-width="1.6" stroke-linecap="round"/><path d="M2 21.5q2.5-1.5 5 0t5 0 5 0 5 0" fill="none" stroke="#3E3A39" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.8 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1L3.2 9.2l6.1-.8Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-tick" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5L19.5 6.5" fill="none" stroke="#3E3A39" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3.5" fill="#fff" stroke="#3E3A39" stroke-width="1.8"/><path d="M3.5 10h17" stroke="#3E3A39" stroke-width="1.8"/><path d="M8 3v4M16 3v4" stroke="#3E3A39" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="15" r="2" fill="#F2A497" stroke="#3E3A39" stroke-width="1.4"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><rect x="4.5" y="3.5" width="15" height="18" rx="3" fill="#fff" stroke="#3E3A39" stroke-width="1.8"/><path d="m7.5 9 1.5 1.5 2.5-3M13.5 9.5h3.5M7.5 15l1.5 1.5 2.5-3M13.5 15.5h3.5" fill="none" stroke="#3E3A39" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 18V7M3 14h18v4" fill="none" stroke="#3E3A39" stroke-width="1.8" stroke-linecap="round"/><rect x="5" y="10" width="5" height="4" rx="1.5" fill="#fff" stroke="#3E3A39" stroke-width="1.5"/><path d="M11 14v-3.5c0-.8.7-1.5 1.5-1.5H19c1.1 0 2 .9 2 2V14" fill="#F2A497" stroke="#3E3A39" stroke-width="1.6"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><rect x="4" y="7.5" width="16" height="13" rx="3" fill="#fff" stroke="#3E3A39" stroke-width="1.8"/><path d="M9 7.5V5.5c0-1 .8-1.8 1.8-1.8h2.4c1 0 1.8.8 1.8 1.8v2" fill="none" stroke="#3E3A39" stroke-width="1.8"/><path d="M4 12.5h16" stroke="#3E3A39" stroke-width="1.6"/><rect x="10.5" y="11" width="3" height="3" rx="1" fill="#F6D27A" stroke="#3E3A39" stroke-width="1.3"/></symbol>
+    <symbol id="i-motion" viewBox="0 0 24 24"><path d="M3 15q3-6 6 0t6 0 6 0" fill="none" stroke="#3E3A39" stroke-width="2.2" stroke-linecap="round"/><circle cx="18" cy="6.5" r="2.5" fill="#F6D27A" stroke="#3E3A39" stroke-width="1.6"/></symbol>
+    <symbol id="i-still" viewBox="0 0 24 24"><path d="M3 13h18" fill="none" stroke="#3E3A39" stroke-width="2.2" stroke-linecap="round"/><circle cx="18" cy="6.5" r="2.5" fill="#fff" stroke="#3E3A39" stroke-width="1.6"/></symbol>
+    <symbol id="i-yen" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#F6D27A" stroke="#3E3A39" stroke-width="1.8"/><path d="m8.5 7 3.5 5 3.5-5M12 12v6M9 12.5h6M9 15h6" fill="none" stroke="#3E3A39" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- 頂端固定選單 -->
+<nav class="nav" aria-label="主要選單">
+  <a class="brand" href="#home" aria-label="回到首頁">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#F2A497" stroke="#3E3A39" stroke-width="3"/><path d="M20 10v20M13 30h14" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/><path d="M16 14h8l-4-5z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2.4" stroke-linejoin="round"/></svg>
+    <span>福岡之旅</span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#home">首頁</a>
+    <a href="#flight">航班</a>
+    <a href="#days">每日行程</a>
+    <a href="#todo">待辦</a>
+    <a href="#hotel">住宿</a>
+    <a href="#prep">出發前</a>
+    <a href="#luggage">行李</a>
+    <a href="#expense">記帳</a>
+  </div>
+  <button class="motion-btn" id="motionBtn" type="button" aria-pressed="false" aria-label="減少動態效果" title="減少動態效果">
+    <svg aria-hidden="true"><use href="#i-motion"/></svg>
+  </button>
+</nav>
+
+<main>
+<!-- ============ 首頁 ============ -->
+<section id="home" class="hero">
+  <div class="wrap">
+    <div class="card hero-card">
+      <svg class="hero-art" viewBox="0 0 400 250" role="img" aria-label="插圖：福岡塔、柳川遊船、太宰府梅花與飛機">
+        <rect width="400" height="250" fill="#E2F1F7"/>
+        <g class="spin">
+          <g stroke="#3E3A39" stroke-width="3" stroke-linecap="round">
+            <path d="M338 14v10M338 86v10M297 55h10M369 55h10M309 26l7 7M360 77l7 7M309 84l7-7M360 33l7-7"/>
+          </g>
+          <circle cx="338" cy="55" r="22" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+        </g>
+        <g class="drift"><path d="M34 74c-10 0-14-14-3-17 1-11 15-14 21-6 6-9 22-6 22 6 11 1 11 17 0 17Z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/></g>
+        <g class="drift2"><path d="M222 44c-8 0-11-11-2-13 1-9 12-11 17-5 5-7 18-5 18 5 9 1 9 13 0 13Z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/></g>
+        <g class="float">
+          <g transform="translate(118 30) rotate(-8)">
+            <path d="M8 22h64c9 0 14 4 14 7s-5 6-14 6H18L4 24Z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M4 24 0 8h9l12 14" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M34 29 52 46h9L52 29" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M20 30h58" stroke="#F2A497" stroke-width="3"/>
+            <circle cx="40" cy="26" r="2" fill="#3E3A39"/><circle cx="49" cy="26" r="2" fill="#3E3A39"/><circle cx="58" cy="26" r="2" fill="#3E3A39"/>
+            <path d="M74 24q6 0 8 4" fill="none" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+        </g>
+        <path d="M0 168c40-30 80-40 120-14 30-28 80-36 130-6 40-24 100-28 150 2v100H0Z" fill="#B9DAA5" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+        <g stroke="#3E3A39" stroke-width="3" stroke-linejoin="round">
+          <rect x="186" y="150" width="26" height="38" rx="4" fill="#FFFCF6"/>
+          <rect x="214" y="138" width="22" height="50" rx="4" fill="#F6D27A"/>
+          <rect x="238" y="156" width="24" height="32" rx="4" fill="#FCE5E0"/>
+          <rect x="318" y="146" width="30" height="42" rx="4" fill="#FFFCF6"/>
+          <rect x="350" y="160" width="26" height="28" rx="4" fill="#F2A497"/>
+        </g>
+        <g fill="#3E3A39"><rect x="193" y="158" width="4" height="5" rx="1"/><rect x="202" y="158" width="4" height="5" rx="1"/><rect x="193" y="170" width="4" height="5" rx="1"/><rect x="202" y="170" width="4" height="5" rx="1"/><rect x="221" y="148" width="8" height="4" rx="1"/><rect x="221" y="160" width="8" height="4" rx="1"/><rect x="221" y="172" width="8" height="4" rx="1"/><rect x="325" y="155" width="5" height="5" rx="1"/><rect x="336" y="155" width="5" height="5" rx="1"/><rect x="325" y="168" width="5" height="5" rx="1"/><rect x="336" y="168" width="5" height="5" rx="1"/></g>
+        <g>
+          <path d="M276 188 284 72h12l8 116Z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M283 90l17 20M282 110l19 22M281 132l21 24M280 156l23 26M297 90l-15 20M299 110l-18 22M300 132l-20 24M302 156l-23 26" stroke="#FFFCF6" stroke-width="2"/>
+          <rect x="279" y="96" width="22" height="10" rx="3" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+          <path d="M290 72V48" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="290" cy="46" r="3.5" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5" class="twinkle"/>
+        </g>
+        <rect x="0" y="186" width="400" height="64" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3"/>
+        <g class="wave" stroke="#FFFCF6" stroke-width="3" fill="none" stroke-linecap="round">
+          <path d="M0 206q10-6 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0"/>
+          <path d="M20 236q10-6 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0"/>
+        </g>
+        <g class="bob">
+          <path d="M150 218h110l-14 14h-84Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M156 218h98" stroke="#3E3A39" stroke-width="3"/>
+          <circle cx="186" cy="208" r="7" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2.5"/>
+          <path d="M178 218q8-8 16 0" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5"/>
+          <circle cx="206" cy="208" r="7" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2.5"/>
+          <path d="M198 218q8-8 16 0" fill="#B9DAA5" stroke="#3E3A39" stroke-width="2.5"/>
+          <path d="M236 218v-20" stroke="#3E3A39" stroke-width="3"/>
+          <rect x="229" y="198" width="14" height="20" rx="5" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2.5"/>
+          <circle cx="236" cy="191" r="6" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2.5"/>
+          <path d="M224 190 236 179l12 11Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="m262 174-18 66" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <g class="sway">
+          <path d="M0 98c24 2 40 10 58 26M30 104c4-10 12-16 22-18" fill="none" stroke="#3E3A39" stroke-width="4" stroke-linecap="round"/>
+          <g stroke="#3E3A39" stroke-width="2.5">
+            <g transform="translate(58 124)"><circle r="9" fill="#F2A497"/><circle r="3" fill="#F6D27A"/></g>
+            <g transform="translate(52 86)"><circle r="8" fill="#FCE5E0"/><circle r="2.6" fill="#F6D27A"/></g>
+            <g transform="translate(22 100)"><circle r="7" fill="#F2A497"/><circle r="2.4" fill="#F6D27A"/></g>
+          </g>
+        </g>
+      </svg>
+      <div class="hero-body">
+        <span class="hero-kicker">自己去玩・兩日慢慢行</span>
+        <h1>福岡周邊 6 日小旅行</h1>
+        <p class="dates">2026 / 12 / 13（日）→ 12 / 18（五）・博多 柳川 太宰府 門司港 北九州</p>
+        <div class="countdown" id="countdown" aria-live="polite">
+          <div class="cd-box"><div class="cd-num" id="cdD">--</div><div class="cd-lbl">日</div></div>
+          <div class="cd-box"><div class="cd-num" id="cdH">--</div><div class="cd-lbl">時</div></div>
+          <div class="cd-box"><div class="cd-num" id="cdM">--</div><div class="cd-lbl">分</div></div>
+          <div class="cd-box"><div class="cd-num" id="cdS">--</div><div class="cd-lbl">秒</div></div>
+        </div>
+        <p class="cd-msg" id="cdMsg">距離出發還有…</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 航班 ============ -->
+<section id="flight">
+  <div class="wrap">
+    <h2 class="sec-title"><span class="bubble" style="background:var(--mizu)"><svg aria-hidden="true"><use href="#i-plane"/></svg></span>航班資訊</h2>
+    <div class="flights">
+      <article class="card flight out">
+        <div class="flight-top"><span class="flight-no">CX512</span><span class="chip">去程・12/13（日）</span></div>
+        <div class="flight-route">
+          <div class="port"><b>HKG</b><span>香港 T1</span><span class="t">08:45</span></div>
+          <svg class="flight-path" viewBox="0 0 90 40" aria-hidden="true"><path d="M4 30q41-30 82 0" fill="none" stroke="#3E3A39" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><g class="float"><use href="#i-plane" x="33" y="2" width="24" height="24"/></g></svg>
+          <div class="port"><b>FUK</b><span>福岡</span><span class="t">13:00</span></div>
+        </div>
+        <div class="ticket-cut"></div>
+        <div class="flight-foot"><span>國泰航空 Cathay Pacific</span><span>當地時間</span></div>
+      </article>
+      <article class="card flight back">
+        <div class="flight-top"><span class="flight-no">CX589</span><span class="chip">回程・12/18（五）</span></div>
+        <div class="flight-route">
+          <div class="port"><b>FUK</b><span>福岡</span><span class="t">16:35</span></div>
+          <svg class="flight-path" viewBox="0 0 90 40" aria-hidden="true"><path d="M4 30q41-30 82 0" fill="none" stroke="#3E3A39" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><g class="float2"><use href="#i-plane" x="33" y="2" width="24" height="24"/></g></svg>
+          <div class="port"><b>HKG</b><span>香港</span><span class="t">19:40</span></div>
+        </div>
+        <div class="ticket-cut"></div>
+        <div class="flight-foot"><span>國泰航空 Cathay Pacific</span><span>當地時間</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 每日行程 ============ -->
+<section id="days">
+  <div class="wrap">
+    <h2 class="sec-title"><span class="bubble" style="background:var(--yama)"><svg aria-hidden="true"><use href="#i-calendar"/></svg></span>每日行程</h2>
+    <div class="day-tabs" role="tablist" aria-label="選擇日期" id="dayTabs"></div>
+    <div class="day-panel" id="dayPanel" role="tabpanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ============ 待辦 ============ -->
+<section id="todo">
+  <div class="wrap">
+    <h2 class="sec-title"><span class="bubble" style="background:var(--coral)"><svg aria-hidden="true"><use href="#i-list"/></svg></span>待辦清單</h2>
+    <div id="todoList"></div>
+  </div>
+</section>
+
+<!-- ============ 住宿 ============ -->
+<section id="hotel">
+  <div class="wrap">
+    <h2 class="sec-title"><span class="bubble" style="background:var(--take)"><svg aria-hidden="true"><use href="#i-bed"/></svg></span>住宿資訊</h2>
+    <article class="card hotel">
+      <svg class="hotel-art" viewBox="0 0 400 150" role="img" aria-label="插圖：博多站旁的酒店">
+        <rect width="400" height="150" fill="#E8F3E1"/>
+        <g class="drift"><path d="M48 46c-8 0-10-11-2-13 1-8 11-10 16-5 5-7 17-5 17 5 8 1 8 13 0 13Z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/></g>
+        <g class="twinkle"><use href="#i-star" x="330" y="20" width="22" height="22"/></g>
+        <g class="twinkle d2"><use href="#i-star" x="360" y="48" width="16" height="16"/></g>
+        <rect x="150" y="30" width="100" height="112" rx="10" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+        <rect x="150" y="30" width="100" height="22" rx="10" fill="#F2A497" stroke="#3E3A39" stroke-width="3"/>
+        <text x="200" y="46" text-anchor="middle" font-size="12" fill="#3E3A39" font-family="Huninn,sans-serif">HOTEL</text>
+        <g fill="#A8D3E6" stroke="#3E3A39" stroke-width="2.5">
+          <rect x="164" y="62" width="18" height="14" rx="3"/><rect x="191" y="62" width="18" height="14" rx="3"/><rect x="218" y="62" width="18" height="14" rx="3"/>
+          <rect x="164" y="86" width="18" height="14" rx="3"/><rect x="191" y="86" width="18" height="14" rx="3" fill="#F6D27A"/><rect x="218" y="86" width="18" height="14" rx="3"/>
+        </g>
+        <rect x="186" y="112" width="28" height="30" rx="6" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+        <rect x="270" y="78" width="120" height="64" rx="10" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3"/>
+        <rect x="282" y="90" width="96" height="16" rx="4" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2.5"/>
+        <text x="330" y="102" text-anchor="middle" font-size="11" fill="#3E3A39" font-family="Huninn,sans-serif">博多駅</text>
+        <g class="hop"><rect x="60" y="98" width="38" height="44" rx="8" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/><path d="M71 98v-10h16v10" fill="none" stroke="#3E3A39" stroke-width="3"/><path d="M60 118h38" stroke="#3E3A39" stroke-width="2.5"/></g>
+        <g class="hop d2"><rect x="104" y="108" width="30" height="34" rx="7" fill="#F2A497" stroke="#3E3A39" stroke-width="3"/><path d="M113 108v-8h12v8" fill="none" stroke="#3E3A39" stroke-width="3"/></g>
+        <path d="M0 142h400" stroke="#3E3A39" stroke-width="3"/>
+      </svg>
+      <div class="hotel-body">
+        <h3>ORIENTAL HOTEL FUKUOKA HAKATA STATION</h3>
+        <span class="chip" style="background:var(--yama-l)">5 晚・包早餐・Agoda 預訂</span>
+        <dl class="info-grid">
+          <dt>入住</dt><dd>12/13（日）</dd>
+          <dt>退房</dt><dd>12/18（五）・可寄存行李</dd>
+          <dt>地址</dt><dd>4-23 Hakata-eki Chuo-gai<br>〒812-0012</dd>
+          <dt>電話</dt><dd>+81 92-461-0170</dd>
+          <dt>位置</dt><dd>博多站 筑紫口一側（筑紫東 4 口）</dd>
+        </dl>
+        <div class="btn-row">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Oriental+Hotel+Fukuoka+Hakata+Station" target="_blank" rel="noopener">開啟地圖</a>
+          <a class="btn blue" href="tel:+81924610170">致電酒店</a>
+        </div>
+      </div>
+    </article>
+
+    <div class="card station-map">
+      <h3>博多站周邊速查</h3>
+      <svg viewBox="0 0 360 230" role="img" aria-label="博多站平面示意：博多口一側有博多巴士總站、Tokyu Hands、AMU PLAZA、KITTE博多；中間有博多阪急；筑紫口一側有 DEITOS、AMU EST">
+        <g stroke="#3E3A39" stroke-width="2.5" font-family="Huninn,sans-serif" font-size="12" text-anchor="middle">
+          <rect x="8" y="8" width="80" height="38" rx="8" fill="#A8D3E6"/>
+          <rect x="8" y="54" width="80" height="44" rx="8" fill="#B9DAA5"/>
+          <rect x="8" y="132" width="80" height="34" rx="8" fill="#F6D27A"/>
+          <rect x="8" y="176" width="80" height="44" rx="8" fill="#F2A497"/>
+          <rect x="96" y="8" width="128" height="70" rx="8" fill="#FCE5E0"/>
+          <rect x="232" y="8" width="120" height="70" rx="8" fill="#ECE6F5"/>
+          <ellipse cx="180" cy="116" rx="70" ry="28" fill="#FFFCF6"/>
+          <rect x="96" y="154" width="128" height="66" rx="8" fill="#FDF2D3"/>
+          <rect x="232" y="154" width="120" height="66" rx="8" fill="#E2F1F7"/>
+          <rect x="262" y="90" width="90" height="56" rx="8" fill="#E8F3E1"/>
+        </g>
+        <g fill="#3E3A39" font-family="Huninn,sans-serif" font-size="12" text-anchor="middle">
+          <text x="48" y="32">博多巴士總站</text>
+          <text x="48" y="80">Tokyu Hands</text>
+          <text x="48" y="120" font-size="13">◀ 博多口</text>
+          <text x="48" y="154">AMU PLAZA</text>
+          <text x="48" y="203">KITTE 博多</text>
+          <text x="160" y="47">マイング（名產街）</text>
+          <text x="292" y="47">DEITOS（麵街）</text>
+          <text x="180" y="121" font-size="14">JR 博多站</text>
+          <text x="160" y="191">博多阪急</text>
+          <text x="292" y="191">AMU EST</text>
+          <text x="307" y="113" font-size="13">筑紫口 ▶</text>
+          <text x="307" y="133" font-size="11">往酒店</text>
+        </g>
+      </svg>
+      <p class="muted" style="margin:6px 0 0">示意圖，非實際比例。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 出發前 / 行李 ============ -->
+<div class="wrap lists-2">
+  <section id="prep">
+    <h2 class="sec-title"><span class="bubble" style="background:var(--yama)"><svg aria-hidden="true"><use href="#i-list"/></svg></span>出發前清單</h2>
+    <div id="prepList"></div>
+  </section>
+  <section id="luggage">
+    <h2 class="sec-title"><span class="bubble" style="background:var(--mizu)"><svg aria-hidden="true"><use href="#i-bag"/></svg></span>行李清單</h2>
+    <div id="bagList"></div>
+  </section>
+</div>
+
+<!-- ============ 記帳 ============ -->
+<section id="expense">
+  <div class="wrap">
+    <h2 class="sec-title"><span class="bubble" style="background:var(--yama)"><svg aria-hidden="true"><use href="#i-yen"/></svg></span>旅費記帳</h2>
+
+    <div class="card exp-total">
+      <div class="muted">總支出</div>
+      <div class="big" id="expTotal">¥0</div>
+      <div class="hkd" id="expTotalHkd">≈ HK$0</div>
+      <div class="rate-row">
+        <label for="expRate">匯率：¥1 = HK$</label>
+        <input type="number" id="expRate" step="0.0001" min="0" inputmode="decimal">
+        <span class="muted">（可自行更改）</span>
+      </div>
+      <div class="cat-bars" id="expCats"></div>
+    </div>
+
+    <div class="card exp-card" id="expFormCard">
+      <h3><span id="expFormTitle">新增一筆</span></h3>
+      <form id="expForm" autocomplete="off">
+        <div class="row2">
+          <label class="field">日期<select id="fDay"></select></label>
+          <label class="field">付款人<select id="fPayer"></select></label>
+        </div>
+        <label class="field">項目<input type="text" id="fTitle" maxlength="40" placeholder="例如：柳川遊船、一蘭拉麵" required></label>
+        <div class="field">金額
+          <div class="amt-row">
+            <input type="number" id="fAmt" min="0" step="any" inputmode="decimal" placeholder="0" required aria-label="金額">
+            <select id="fCur" aria-label="貨幣"><option value="JPY">日圓 ¥</option><option value="HKD">港幣 HK$</option></select>
+          </div>
+        </div>
+        <div class="field"><span>類別</span><div class="pills cat-pills" id="fCats"></div></div>
+        <div class="field"><span>分攤給（平均分）</span><div class="pills" id="fSplit"></div></div>
+        <div class="form-btns">
+          <button class="btn" type="submit" id="fSubmit">加入</button>
+          <button class="btn ghost" type="button" id="fCancel" hidden>取消修改</button>
+          <button class="btn pink" type="button" id="fDelete" hidden>刪除</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card exp-card" style="background:var(--mizu-l)">
+      <h3>同行成員 <span class="chip" id="peopleCount"></span></h3>
+      <div class="people" id="peopleList"></div>
+      <form class="add-person" id="addPerson">
+        <input type="text" id="newPerson" maxlength="12" placeholder="加入同行者名字" aria-label="同行者名字">
+        <button class="btn blue" type="submit">加入</button>
+      </form>
+    </div>
+
+    <div class="card exp-card">
+      <h3>支出紀錄 <span class="chip" id="expCount">0 筆</span></h3>
+      <div id="expList"></div>
+    </div>
+
+    <div class="card exp-card" style="background:var(--take-l)">
+      <h3>誰要俾誰？</h3>
+      <div id="settle"></div>
+    </div>
+
+    <div class="card exp-card" style="background:var(--mizu-l)">
+      <h3>雲端同步 <span class="chip" id="syncStatus">未連接</span></h3>
+      <label class="field">Google Apps Script 網址
+        <input type="text" id="syncUrl" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="https://script.google.com/macros/s/…/exec">
+      </label>
+      <div class="form-btns">
+        <button class="btn blue" type="button" id="syncSave">連接</button>
+        <button class="btn ghost" type="button" id="syncNow">立即同步</button>
+        <button class="btn" type="button" id="syncInvite">分享邀請連結</button>
+      </div>
+      <p class="share-note">連接後，記帳、成員、匯率同所有打勾清單都會存在 Google 試算表，大家打開同一個網址就可以一齊編輯（約 20 秒自動更新一次）。冇網絡時會先存喺手機，有網絡再自動上載。清空網址再按「連接」即可中斷。</p>
+    </div>
+
+    <div class="card exp-card" style="background:var(--coral-l)">
+      <h3>分享給同行者</h3>
+      <div class="btn-row">
+        <button class="btn" type="button" id="shareText">分享文字摘要</button>
+        <button class="btn blue" type="button" id="shareCode">分享記帳碼</button>
+        <button class="btn green" type="button" id="dlCsv">下載 Excel（CSV）</button>
+      </div>
+      <p class="share-note"><b style="font-weight:normal">文字摘要</b>：直接貼到 WhatsApp，對方睇到總數同誰要俾誰。<br>
+      <b style="font-weight:normal">記帳碼</b>：對方用同一個網頁檔，在下方貼上即可匯入你的紀錄，一齊繼續記。</p>
+      <label class="field" style="margin-top:12px">匯入記帳碼
+        <textarea id="importBox" placeholder="把同行者傳來的記帳碼貼在這裡"></textarea>
+      </label>
+      <div class="form-btns">
+        <button class="btn" type="button" id="importMerge">合併匯入</button>
+        <button class="btn ghost" type="button" id="importReplace">取代我的紀錄</button>
+      </div>
+      <div style="text-align:right;margin-top:12px"><button class="reset" type="button" id="expClear">清除全部記帳</button></div>
+    </div>
+  </div>
+</section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</main>
+
+<footer>
+  行程資料整理自〈【福岡周邊】行程表2026〉・自己去玩（兩日慢慢行）<br>
+  營業時間及班次以現場為準・未連接雲端時，打勾及記帳紀錄只儲存在這部裝置
+</footer>
+
+<script>
+/* ===================== 行程資料 ===================== */
+const TAG = {
+  plane:{c:'t-plane',i:'i-plane'}, bus:{c:'t-bus',i:'i-bus'}, subway:{c:'t-subway',i:'i-subway'},
+  nishi:{c:'t-nishi',i:'i-train'}, jr:{c:'t-jr',i:'i-train'}, walk:{c:'t-walk',i:'i-walk'},
+  cable:{c:'t-cable',i:'i-cable'}, boat:{c:'t-boat',i:'i-boat'}
+};
+
+const DAYS = [
+ {date:'12/13',dow:'日',title:'香港 → 福岡',sub:'抵達博多・車站美食與購物',art:'d1',items:[
+  {s:'08:45',e:'13:00',k:'move',t:'香港 HKG T1 → 福岡 FUK',tags:[['plane','飛機 CX512']],note:'國泰航空・當地時間'},
+  {s:'13:30',e:'14:00',k:'move',t:'福岡機場 → 博多站',tags:[['bus','西鐵巴士']],cost:'¥400',note:'先去買巴士票／直接用 IC 卡，再去 6/7 號月台乘車'},
+  {s:'14:00',e:'14:15',k:'rest',t:'酒店放行李',tags:[['walk','步行']]},
+  {s:'14:30',e:'15:15',k:'meal',must:1,t:'遲來的午餐｜麵屋兼虎 博多DEITOS店',note:'JR博多駅 博多めん街道內・09:30–22:00'},
+  {s:'15:30',e:'17:00',k:'meal',t:'Plan A 晚餐｜肉屋肉一 博多店',note:'16:00–00:00・要提早排隊'},
+  {s:'15:30',e:'18:15',k:'shop',t:'買手信',note:'博多名產街內・09:00–21:00',list:['にわかせんぺい本舗 東雲堂（博多駅マイング店）— 造型特別的煎餅','博多風美庵（マイング博多駅店）— 明太子蝦餅']},
+  {s:'18:30',e:'19:30',k:'meal',t:'Plan B 晚餐｜極味屋'},
+  {s:'19:30',e:'21:00',k:'shop',t:'Yodobashi・Lopia 超市購物',note:'博多站一帶順路逛：',list:['博多 Amu EST — 3coins 1/F、@Cosme B1/F、Lowrys Farm B1/F','博多 Amu Plaza — 無印良品 6/F、Freak\'s Store 4/F、Tokyu Hands 1–5/F','阪急百貨 — B1 很多伴手禮及麵包小點，治一郎在 1 樓','KITTE 博多 — Seria 4/F']}
+ ]},
+ {date:'12/14',dow:'一',title:'柳川遊船 × 太宰府',sub:'坐船遊水鄉、食鰻魚飯、參拜太宰府',art:'d2',items:[
+  {s:'07:00',e:'08:35',k:'rest',t:'起身・酒店早餐',note:'早餐 07:25–08:00'},
+  {s:'08:47',e:'08:53',k:'move',t:'博多 → 天神',tags:[['subway','地下鐵 空港線']],cost:'¥210',note:'西唐津行・2 番線 → 2 番線'},
+  {s:'08:55',e:'09:20',k:'move',t:'天神 → 西鉄福岡（天神）',tags:[['walk','步行']],note:'在天神站跟 Central Gate 及黃色／黑色指標找「西鉄福岡 (Tenjin)」或「天神地下街」，經地下街或連接通道步行前往。'},
+  {s:'09:30',e:'10:19',k:'move',t:'西鉄福岡 → 西鉄柳川',tags:[['nishi','西鐵 天神大牟田線特急']],cost:'¥960',note:'大牟田行・到達 1・2 番線',alt:['10:00 → 10:49（同線特急）']},
+  {s:'10:20',e:'10:30',k:'move',t:'前往松月乘船場（柳川觀光開發）',tags:[['walk','步行']]},
+  {s:'10:40',e:'11:40',k:'sight',must:1,t:'柳川遊船',tags:[['boat','遊船']],cost:'¥2,200',note:'09:30 起每 30 分鐘一班（每小時 10 分及 40 分），最後一班 15:10',alt:['11:10 → 12:10（下一班）']},
+  {s:'11:45',e:'12:45',k:'meal',must:1,t:'午餐｜若松屋 鰻魚料理',note:'11:00–14:30、17:00–19:45（週二、三休）。先抽號碼牌，再在紙上寫人數；1 樓有等候區，不用等太久。'},
+  {s:'13:00',e:'13:15',k:'move',t:'回柳川市営本城町観光駐車場搭 Shuttle',tags:[['bus','接駁車']],note:'班次：12:00／12:30／13:00／14:00／14:30／15:00／15:30／16:00／16:30',alt:['14:00 → 14:15（下一班）']},
+  {s:'13:35',e:'14:08',k:'move',t:'西鉄柳川 → 西鉄二日市',tags:[['nishi','西鐵 特急']],cost:'¥780',note:'西鉄福岡行・3・4 番線',alt:['14:35 → 15:08']},
+  {s:'14:20',e:'14:26',k:'move',t:'西鉄二日市 → 太宰府',tags:[['nishi','西鐵 太宰府線']],alt:['15:20 → 15:26']},
+  {s:'14:30',e:'17:00',k:'sight',must:1,t:'遊覽太宰府＋表參道',list:['梅枝餅 安武 — 08:30–18:00','梅枝餅 かさの家 — 09:00–18:00（梅枝餅交換店舗）','茶房きくち — 09:00–17:00，週四休（梅枝餅交換店舗）','明太子泡飯｜味の明太子ふくや 太宰府店 — 09:30–17:30，外帶櫃檯用食券機買券','拉麵｜一蘭 太宰府參道店 — 09:00–19:00，先抽號碼牌，逛約 45 分鐘再回來排']},
+  {s:'16:21',e:'16:55',k:'move',t:'太宰府 → 二日市 → 西鉄福岡（天神）',tags:[['nishi','西鐵 太宰府線＋特急']],cost:'¥480',note:'二日市 16:39 轉車',alt:['16:33 出發 → 17:07 抵達','16:50 出發 → 17:17 抵達','17:01 出發 → 17:38 抵達']},
+  {s:'18:00',e:'19:00',k:'meal',t:'晚餐｜串燒 六三四',note:'17:00–00:00・要預約'},
+  {s:'晚上',e:'',k:'shop',t:'天神夜逛 → 回博多',tags:[['subway','地下鐵']],list:['The Full Full 明太子法包（星期二休息）','天神地下街／mina 天神 逛街','天神／天神南 → 博多']}
+ ]},
+ {date:'12/15',dow:'二',title:'博多運河城 × 天神',sub:'運河城、燒肉、天神甜點與購物',art:'d3',items:[
+  {s:'08:00',e:'09:45',k:'rest',t:'起身・酒店早餐',note:'早餐 08:35–09:15'},
+  {s:'09:50',e:'09:51',k:'move',t:'博多 → 櫛田神社前',tags:[['subway','地下鐵 七隈線']],cost:'¥210',note:'橋本行・3・4 番線 → 2 番線'},
+  {s:'10:00',e:'13:15',k:'sight',must:1,t:'博多運河城 Canal City',note:'7 號出口'},
+  {s:'13:30',e:'14:30',k:'meal',must:1,t:'午餐｜燒肉 大東園 本店',note:'✔ 已經預約'},
+  {s:'14:37',e:'14:39',k:'move',t:'櫛田神社前 → 天神南',tags:[['subway','地下鐵 七隈線']],note:'橋本行・2 番線 → 2 番線'},
+  {s:'下午',e:'',k:'shop',t:'天神甜點＋購物',list:['蘋果派｜RINGO 天神地下街店 — 09:00–21:00','芝士撻｜BAKE CHEESE TART（天神地下街）— 09:00–21:00','天神 mina — Seria 6/F、Honeys 5/F、LOFT 4/F、GU 3/F、UNIQLO 2/F & 1/F','天神 Aeon Shoppers Fukuoka — mina 隔壁，2 樓大型無印良品，B1 大型超市']},
+  {s:'傍晚',e:'',k:'move',t:'天神 → 博多',tags:[['subway','地下鐵']]}
+ ]},
+ {date:'12/16',dow:'三',title:'門司港 × 皿倉山夜景',sub:'懷舊港町散步，再上山看夜景',art:'d4',items:[
+  {s:'08:25',e:'10:10',k:'rest',t:'起身・酒店早餐',note:'早餐 08:50–09:30'},
+  {s:'10:20',e:'11:07',k:'move',t:'博多 → 小倉',tags:[['jr','JR 特急 ソニック15号']],cost:'¥1,730',note:'大分行・3 番線 → 7 番線',alt:['ソニック17号 11:00 → 11:40，轉 11:56 → 門司港 12:10']},
+  {s:'11:23',e:'11:37',k:'move',t:'小倉 → 門司港',tags:[['jr','JR 鹿兒島本線']],note:'門司港行・8 番線'},
+  {s:'12:00',e:'13:30',k:'meal',t:'午餐｜門司港三選一',list:['Princess Phi Phi — 北口步行約 1 分；週一 11:00–15:30，其他日子 11:00–20:30','BEAR FRUITS — 週一至四、日 11:00–20:30；週五、六 11:00–21:30','MILKHALL MOJIKO — 週日至四 10:00–20:00；週五、六 10:00–21:00']},
+  {s:'13:30',e:'15:45',k:'sight',must:1,t:'門司港懷舊區遊覽',tags:[['walk','步行']],list:['藍翼門司吊橋 — 開橋 10:00／11:00／13:00／14:00／15:00／16:00（20 分鐘後閉橋）','舊門司三井俱樂部 & 舊大阪商船','門司港懷舊展望室 — 10:00–22:00（最後入場 21:30），成人 ¥600','九州鐵道紀念館 — 09:00–17:00（最後入場 16:30），成人 ¥500']},
+  {s:'15:41',e:'16:15',k:'move',t:'門司港 → 八幡',tags:[['jr','JR 鹿兒島本線']],cost:'¥560',note:'南福岡行・到達 1・2 番線',alt:['15:59 → 16:23（快速 羽犬塚行）','16:23 → 17:01（遠賀川行，配 17:05 接駁車）']},
+  {s:'16:45',e:'16:55',k:'move',t:'JR 八幡駅 → 皿倉山纜車山麓駅',tags:[['bus','接駁車']]},
+  {s:'17:00',e:'17:11',k:'sight',must:1,t:'皿倉山 上山看夜景',tags:[['cable','纜車 6 分＋斜坡車 3 分']],note:'來回票 大人 ¥1,230・17:08 轉斜坡車',alt:['如第一班上唔到：17:30 纜車 → 17:38 斜坡車']},
+  {s:'17:30',e:'18:45',k:'meal',t:'晚餐（考慮中）｜天宮 TEN・KYU',note:'11–3 月 11:00–19:00（L.O. 18:30）・星期二休息'},
+  {s:'18:33',e:'19:10',k:'move',t:'落山 → JR 八幡駅',tags:[['cable','斜坡車＋纜車']],note:'18:33 斜坡車 → 18:40 纜車 → 19:00 接駁車',alt:['18:53 斜坡車 → 19:00 纜車 → 19:15 接駁車']},
+  {s:'19:33',e:'20:41',k:'move',t:'八幡 → 博多',tags:[['jr','JR 鹿兒島本線 区間快速']],cost:'¥1,300',note:'荒木行',alt:['19:33 → 黒崎 19:36，轉 JR 特急 ソニック52号 → 博多 20:28']}
+ ]},
+ {date:'12/17',dow:'四',title:'北九州 The Outlet',sub:'Outlet 掃貨，回博多食烏冬',art:'d5',items:[
+  {s:'08:25',e:'10:10',k:'rest',t:'起身・酒店早餐',note:'早餐 08:50–09:30'},
+  {s:'10:20',e:'10:56',k:'move',t:'博多 → 黒崎',tags:[['jr','JR 特急 ソニック15号']],cost:'¥1,300',note:'大分行・3 番線 → 2 番線'},
+  {s:'11:04',e:'11:09',k:'move',t:'黒崎 → スペースワールド',tags:[['jr','JR 鹿兒島本線']],note:'門司港行・4 番線',alt:['10:32 → 11:32 区間快速直達（門司港行）','ソニック19号 11:20 → 黒崎 11:55，轉 11:59 → 12:04']},
+  {s:'日間',e:'',k:'sight',must:1,t:'The Outlet 北九州',tags:[['walk','步行']],list:['The Outlet','午餐｜Food Court','AEON MALL']},
+  {s:'16:40',e:'17:28',k:'move',t:'スペースワールド → 黒崎 → 博多',tags:[['jr','JR ＋ 特急 ソニック40号']],cost:'¥1,300',note:'黒崎 16:51 轉車',alt:['16:59 出發 → 博多 17:49（ソニック42号）','17:13 出發 → 博多 18:21','17:41 出發 → 博多 18:31（ソニック44号）']},
+  {s:'18:30',e:'19:30',k:'meal',t:'晚餐｜博多うどん酒場 和八（博多駅くうてん店）',note:'AMU PLAZA 博多 10/F・11:00–21:30・南瓜奶油烏冬／天婦羅烏冬（可以更改）'}
+ ]},
+ {date:'12/18',dow:'五',title:'福岡 → 香港',sub:'午餐、買手信、回家',art:'d6',items:[
+  {s:'08:45',e:'10:50',k:'rest',t:'起身・酒店早餐・執行李',note:'早餐 09:00–09:50'},
+  {s:'10:50',e:'11:00',k:'rest',t:'退房＋寄存行李'},
+  {s:'11:30',e:'12:45',k:'meal',t:'午餐｜西新初喜',note:'AMU PLAZA 博多 10/F・11:00–15:00、17:00–22:00・要預約'},
+  {s:'12:45',e:'13:00',k:'rest',t:'回酒店取行李',tags:[['walk','步行']]},
+  {s:'13:00',e:'13:30',k:'move',t:'博多站 → 福岡機場',tags:[['bus','西鐵巴士']],cost:'¥400'},
+  {s:'13:30',e:'16:00',k:'shop',t:'機場＋買手信'},
+  {s:'16:35',e:'19:40',k:'move',t:'福岡 FUK → 香港 HKG',tags:[['plane','飛機 CX589']],note:'國泰航空・當地時間'}
+ ]}
+];
+
+/* ===================== 每日插圖（SVG） ===================== */
+const INK='#3E3A39';
+const ART = {
+ d1:`<rect width="320" height="110" fill="#E2F1F7"/>
+  <g class="drift"><path d="M30 34c-7 0-9-9-2-11 1-7 10-9 14-4 4-6 15-4 15 4 7 1 7 11 0 11Z" fill="#FFFCF6" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/></g>
+  <g class="float"><g transform="translate(70 10) rotate(10)"><path d="M6 16h48c7 0 10 3 10 5s-3 5-10 5H14L3 18Z" fill="#FFFCF6" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><path d="M3 18 0 5h7l9 11" fill="#F2A497" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><path d="M24 22l14 13h7l-7-13" fill="#A8D3E6" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/></g></g>
+  <rect x="150" y="40" width="150" height="62" rx="10" fill="#FFFCF6" stroke="${INK}" stroke-width="3"/>
+  <rect x="150" y="40" width="150" height="18" rx="9" fill="#A8D3E6" stroke="${INK}" stroke-width="3"/>
+  <circle cx="225" cy="35" r="12" fill="#F6D27A" stroke="${INK}" stroke-width="3"/><path d="M225 28v7l5 3" stroke="${INK}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <g fill="#A8D3E6" stroke="${INK}" stroke-width="2.5"><rect x="162" y="66" width="22" height="16" rx="3"/><rect x="214" y="66" width="22" height="16" rx="3"/><rect x="266" y="66" width="22" height="16" rx="3"/></g>
+  <rect x="190" y="72" width="18" height="30" rx="4" fill="#F2A497" stroke="${INK}" stroke-width="3"/><rect x="242" y="72" width="18" height="30" rx="4" fill="#F2A497" stroke="${INK}" stroke-width="3"/>
+  <g class="hop"><path d="M40 78h56c0 16-12 24-28 24s-28-8-28-24Z" fill="#F6D27A" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><path d="M50 78q6-6 12 0t12 0 12 0" fill="none" stroke="${INK}" stroke-width="2.5"/><path d="M78 76 98 56M84 76l18-16" stroke="${INK}" stroke-width="3" stroke-linecap="round"/></g>
+  <g class="spray"><path d="M58 70q-4-6 0-12M68 70q-4-6 0-12" fill="none" stroke="${INK}" stroke-width="2" stroke-linecap="round" opacity=".5"/></g>
+  <path d="M0 102h320" stroke="${INK}" stroke-width="3"/>`,
+ d2:`<rect width="320" height="110" fill="#E8F3E1"/>
+  <rect x="0" y="72" width="320" height="38" fill="#A8D3E6" stroke="${INK}" stroke-width="3"/>
+  <g class="wave" stroke="#FFFCF6" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M0 92q10-5 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0 20 0"/></g>
+  <g class="sway-r"><path d="M44 8v66" stroke="${INK}" stroke-width="4"/><g fill="none" stroke="#B9DAA5" stroke-width="4" stroke-linecap="round"><path d="M44 12q-18 20-22 50M44 12q-8 24-10 52M44 12q10 22 10 52M44 12q22 20 24 46"/></g><g fill="none" stroke="${INK}" stroke-width="1.5" stroke-linecap="round" opacity=".6"><path d="M44 12q-18 20-22 50M44 12q22 20 24 46"/></g></g>
+  <g class="bob"><path d="M96 76h88l-10 12h-68Z" fill="#F6D27A" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><circle cx="120" cy="68" r="6" fill="#FFFCF6" stroke="${INK}" stroke-width="2.5"/><circle cx="138" cy="68" r="6" fill="#FFFCF6" stroke="${INK}" stroke-width="2.5"/><path d="M162 76V60" stroke="${INK}" stroke-width="3"/><path d="M152 58l10-9 10 9Z" fill="#F6D27A" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/><path d="m184 46-14 52" stroke="${INK}" stroke-width="3" stroke-linecap="round"/></g>
+  <g><path d="M222 26h84M228 36h72" stroke="${INK}" stroke-width="3"/><path d="M218 22q46-8 92 0l-4 8q-42-6-84 0Z" fill="#F2A497" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><rect x="234" y="34" width="8" height="40" fill="#F2A497" stroke="${INK}" stroke-width="3"/><rect x="286" y="34" width="8" height="40" fill="#F2A497" stroke="${INK}" stroke-width="3"/></g>
+  <g class="twinkle"><circle cx="210" cy="56" r="6" fill="#F2A497" stroke="${INK}" stroke-width="2.5"/><circle cx="210" cy="56" r="2" fill="#F6D27A"/></g>
+  <g class="twinkle d2"><circle cx="306" cy="54" r="5" fill="#FCE5E0" stroke="${INK}" stroke-width="2.5"/></g>`,
+ d3:`<rect width="320" height="110" fill="#FDF2D3"/>
+  <g stroke="${INK}" stroke-width="3" stroke-linejoin="round">
+   <path d="M20 102V40q30-14 60 0v62Z" fill="#F2A497"/>
+   <path d="M84 102V28q36-16 72 0v74Z" fill="#A8D3E6"/>
+   <path d="M230 102V34q34-14 70 0v68Z" fill="#B9DAA5"/>
+  </g>
+  <g stroke="${INK}" stroke-width="2.5" fill="none"><path d="M28 56q22-8 44 0M28 74q22-8 44 0M92 46q28-10 56 0M92 66q28-10 56 0M238 52q27-10 54 0M238 72q27-10 54 0"/></g>
+  <rect x="150" y="90" width="90" height="12" rx="4" fill="#A8D3E6" stroke="${INK}" stroke-width="3"/>
+  <g class="spray"><path d="M195 90V50" stroke="#A8D3E6" stroke-width="6" stroke-linecap="round"/><path d="M195 90V50" stroke="${INK}" stroke-width="1.5" stroke-dasharray="3 6"/><path d="M195 52q-20 4-28 36M195 52q20 4 28 36" fill="none" stroke="#A8D3E6" stroke-width="4" stroke-linecap="round"/></g>
+  <g class="twinkle"><circle cx="180" cy="44" r="3" fill="#A8D3E6" stroke="${INK}" stroke-width="1.5"/></g>
+  <g class="twinkle d2"><circle cx="212" cy="40" r="3" fill="#A8D3E6" stroke="${INK}" stroke-width="1.5"/></g>
+  <g class="twinkle d3"><use href="#i-star" x="250" y="6" width="20" height="20"/></g>
+  <path d="M0 102h320" stroke="${INK}" stroke-width="3"/>`,
+ d4:`<rect width="320" height="110" fill="#ECE6F5"/>
+  <g class="twinkle"><use href="#i-star" x="200" y="6" width="14" height="14"/></g>
+  <g class="twinkle d2"><use href="#i-star" x="290" y="10" width="16" height="16"/></g>
+  <g class="twinkle d3"><use href="#i-star" x="250" y="18" width="11" height="11"/></g>
+  <path d="M170 102 250 30l70 72Z" fill="#B9DAA5" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M312 30 196 92" stroke="${INK}" stroke-width="2"/>
+  <g class="cable"><path d="M286 44v6" stroke="${INK}" stroke-width="2.5"/><rect x="276" y="50" width="22" height="16" rx="4" fill="#F6D27A" stroke="${INK}" stroke-width="2.5"/><rect x="280" y="53" width="14" height="6" rx="1.5" fill="#A8D3E6" stroke="${INK}" stroke-width="1.5"/></g>
+  <g class="twinkle"><circle cx="214" cy="96" r="2.5" fill="#F6D27A"/><circle cx="234" cy="94" r="2.5" fill="#F6D27A"/></g>
+  <g class="twinkle d2"><circle cx="262" cy="96" r="2.5" fill="#F2A497"/><circle cx="294" cy="95" r="2.5" fill="#F6D27A"/></g>
+  <rect x="14" y="52" width="92" height="50" rx="6" fill="#FFFCF6" stroke="${INK}" stroke-width="3"/>
+  <path d="M10 54 60 30l50 24Z" fill="#B9DAA5" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="60" cy="44" r="6" fill="#F6D27A" stroke="${INK}" stroke-width="2.5"/>
+  <g fill="#A8D3E6" stroke="${INK}" stroke-width="2.5"><rect x="24" y="64" width="12" height="16" rx="3"/><rect x="84" y="64" width="12" height="16" rx="3"/></g>
+  <path d="M50 102V74q10-10 20 0v28" fill="#F2A497" stroke="${INK}" stroke-width="3"/>
+  <rect x="112" y="90" width="66" height="12" fill="#A8D3E6" stroke="${INK}" stroke-width="3"/>
+  <g class="lift-l"><rect x="116" y="82" width="27" height="8" rx="2" fill="#A8D3E6" stroke="${INK}" stroke-width="3"/></g>
+  <g class="lift-r"><rect x="147" y="82" width="27" height="8" rx="2" fill="#A8D3E6" stroke="${INK}" stroke-width="3"/></g>
+  <path d="M0 102h320" stroke="${INK}" stroke-width="3"/>`,
+ d5:`<rect width="320" height="110" fill="#FCE5E0"/>
+  <g class="drift"><path d="M220 30c-7 0-9-9-2-11 1-7 10-9 14-4 4-6 15-4 15 4 7 1 7 11 0 11Z" fill="#FFFCF6" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/></g>
+  <rect x="120" y="50" width="180" height="52" rx="8" fill="#FFFCF6" stroke="${INK}" stroke-width="3"/>
+  <path d="M120 50h180l-10-16H130Z" fill="#B9DAA5" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>
+  <g stroke="${INK}" stroke-width="2.5"><path d="M138 34v16M158 34v16M178 34v16M198 34v16M218 34v16M238 34v16M258 34v16M278 34v16"/></g>
+  <g fill="#A8D3E6" stroke="${INK}" stroke-width="2.5"><rect x="134" y="62" width="36" height="24" rx="3"/><rect x="250" y="62" width="36" height="24" rx="3"/></g>
+  <rect x="190" y="66" width="40" height="36" rx="4" fill="#F6D27A" stroke="${INK}" stroke-width="3"/>
+  <g class="float2"><path d="M60 12q10 10 10 34v20H50V46q0-24 10-34Z" fill="#FFFCF6" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><circle cx="60" cy="38" r="5" fill="#A8D3E6" stroke="${INK}" stroke-width="2.5"/><path d="M50 52l-8 14h8M70 52l8 14h-8" fill="#F2A497" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><path d="M56 70q4 8 8 0" fill="#F6D27A" stroke="${INK}" stroke-width="2.5"/></g>
+  <g class="hop"><rect x="16" y="78" width="24" height="24" rx="4" fill="#F6D27A" stroke="${INK}" stroke-width="3"/><path d="M22 78q6-12 12 0" fill="none" stroke="${INK}" stroke-width="2.5"/></g>
+  <g class="hop d2"><rect x="44" y="72" width="28" height="30" rx="4" fill="#A8D3E6" stroke="${INK}" stroke-width="3"/><path d="M51 72q7-12 14 0" fill="none" stroke="${INK}" stroke-width="2.5"/></g>
+  <g class="hop d3"><rect x="78" y="80" width="22" height="22" rx="4" fill="#B9DAA5" stroke="${INK}" stroke-width="3"/><path d="M83 80q6-10 12 0" fill="none" stroke="${INK}" stroke-width="2.5"/></g>
+  <path d="M0 102h320" stroke="${INK}" stroke-width="3"/>`,
+ d6:`<rect width="320" height="110" fill="#E2F1F7"/>
+  <path d="M0 86h320v24H0Z" fill="#B9DAA5" stroke="${INK}" stroke-width="3"/>
+  <path d="M20 96h280" stroke="#FFFCF6" stroke-width="3" stroke-dasharray="14 10"/>
+  <g class="float"><g transform="translate(170 26) rotate(-14)"><path d="M8 20h70c9 0 13 4 13 6s-4 6-13 6H18L4 22Z" fill="#FFFCF6" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><path d="M4 22 0 6h9l12 14" fill="#F2A497" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><path d="M34 27l18 16h9l-9-16" fill="#A8D3E6" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><circle cx="44" cy="24" r="2" fill="${INK}"/><circle cx="54" cy="24" r="2" fill="${INK}"/><circle cx="64" cy="24" r="2" fill="${INK}"/></g></g>
+  <g class="drift2"><path d="M110 30c-7 0-9-9-2-11 1-7 10-9 14-4 4-6 15-4 15 4 7 1 7 11 0 11Z" fill="#FFFCF6" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/></g>
+  <g class="hop"><rect x="36" y="42" width="44" height="50" rx="9" fill="#F2A497" stroke="${INK}" stroke-width="3"/><path d="M48 42v-10h20v10" fill="none" stroke="${INK}" stroke-width="3"/><path d="M36 64h44" stroke="${INK}" stroke-width="2.5"/><circle cx="46" cy="94" r="3.5" fill="${INK}"/><circle cx="70" cy="94" r="3.5" fill="${INK}"/><rect x="52" y="58" width="12" height="10" rx="3" fill="#F6D27A" stroke="${INK}" stroke-width="2"/></g>
+  <g class="hop d2"><path d="M100 66h26v24h-26Z" fill="#F6D27A" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><path d="M100 72h26M113 66v24" stroke="#F2A497" stroke-width="3"/><path d="M113 66q-8-10-10-2t10 2q8-10 10-2t-10 2" fill="#F2A497" stroke="${INK}" stroke-width="2"/></g>`
+};
+
+/* ===================== 清單資料 ===================== */
+const TODO = [
+ {g:'餐廳預約',items:[
+  {id:'r1',t:'串燒 六三四',s:'12/14（一）18:00 晚餐・要預約'},
+  {id:'r2',t:'西新初喜',s:'12/18（五）11:30 午餐・要預約'},
+  {id:'r3',t:'燒肉 大東園 本店',s:'12/15（二）13:30 午餐・已經預約',def:true},
+  {id:'r4',t:'肉屋肉一 博多店',s:'12/13（日）Plan A・提早排隊'}
+ ]},
+ {g:'現場要辦',items:[
+  {id:'x1',t:'機場買西鐵巴士票／準備 IC 卡',s:'12/13 福岡機場 → 博多站 ¥400'},
+  {id:'x2',t:'柳川遊船船票',s:'12/14・¥2,200'},
+  {id:'x3',t:'皿倉山纜車來回票',s:'12/16・大人 ¥1,230'},
+  {id:'x4',t:'退房後寄存行李',s:'12/18 10:50'}
+ ]},
+ {g:'手信',items:[
+  {id:'s1',t:'東雲堂 にわかせんぺい',s:'博多駅マイング・造型煎餅'},
+  {id:'s2',t:'博多風美庵 明太子蝦餅',s:'博多駅マイング'},
+  {id:'s3',t:'治一郎',s:'博多阪急 1 樓'},
+  {id:'s4',t:'梅枝餅',s:'太宰府表參道'}
+ ]}
+];
+const PREP = [
+ {g:'證件與預訂',items:[
+  {id:'p1',t:'檢查護照有效期'},
+  {id:'p2',t:'填寫 Visit Japan Web 入境資料'},
+  {id:'p3',t:'購買旅遊保險'},
+  {id:'p4',t:'CX512 網上登機手續'},
+  {id:'p5',t:'截圖 Agoda 酒店確認'}
+ ]},
+ {g:'錢與通訊',items:[
+  {id:'p6',t:'兌換日圓現金'},
+  {id:'p7',t:'準備交通 IC 卡（手機錢包或實體卡）'},
+  {id:'p8',t:'安排 eSIM／數據漫遊'},
+  {id:'p9',t:'下載離線地圖、儲存酒店地址'}
+ ]},
+ {g:'行程確認',items:[
+  {id:'p10',t:'確認所有餐廳預約'},
+  {id:'p11',t:'出發前查看福岡天氣預報'},
+  {id:'p12',t:'查看 12/16 門司港及皿倉山交通班次'}
+ ]}
+];
+const BAG = [
+ {g:'隨身重要',items:[
+  {id:'b1',t:'護照'},{id:'b2',t:'信用卡＋日圓現金'},{id:'b3',t:'散紙包（日圓硬幣多）'},{id:'b4',t:'手機＋充電線'},{id:'b5',t:'尿袋'}
+ ]},
+ {g:'電器',items:[
+  {id:'b6',t:'日本用轉插（兩腳扁插）'},{id:'b7',t:'耳機'},{id:'b8',t:'風筒／整髮器（如需要）'}
+ ]},
+ {g:'衣物（12 月較冷）',items:[
+  {id:'b9',t:'保暖外套'},{id:'b10',t:'發熱衣／冷衫'},{id:'b11',t:'頸巾、手套'},{id:'b12',t:'好走的波鞋'},{id:'b13',t:'睡衣、內衣、襪'}
+ ]},
+ {g:'日用品',items:[
+  {id:'b14',t:'個人藥物'},{id:'b15',t:'護膚品＋潤唇膏'},{id:'b16',t:'摺疊雨傘'},{id:'b17',t:'濕紙巾、紙巾'},{id:'b18',t:'環保袋＋摺疊袋（裝手信）'}
+ ]}
+];
+
+/* ===================== 工具 ===================== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const STORE = 'fuk2026-checks';
+let checks = {};
+try { checks = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch(e) {}
+const saveChecks = () => { try { localStorage.setItem(STORE, JSON.stringify(checks)); } catch(e) {} };
+
+/* ===================== 減少動態效果 ===================== */
+const root = document.documentElement;
+const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+let rmPref = null;
+try { rmPref = localStorage.getItem('fuk2026-rm'); } catch(e) {}
+const isReduced = () => root.classList.contains('rm') || (mq.matches && !root.classList.contains('motion-on'));
+function applyMotion(){
+  root.classList.remove('rm','motion-on');
+  if (rmPref === '1') root.classList.add('rm');
+  else if (rmPref === '0') root.classList.add('motion-on');
+  const r = isReduced();
+  const btn = $('#motionBtn');
+  btn.setAttribute('aria-pressed', r ? 'true' : 'false');
+  btn.title = r ? '已減少動態效果（按此開啟動畫）' : '減少動態效果';
+  btn.querySelector('use').setAttribute('href', r ? '#i-still' : '#i-motion');
+}
+$('#motionBtn').addEventListener('click', () => {
+  rmPref = isReduced() ? '0' : '1';
+  try { localStorage.setItem('fuk2026-rm', rmPref); } catch(e) {}
+  applyMotion();
+});
+mq.addEventListener ? mq.addEventListener('change', applyMotion) : mq.addListener(applyMotion);
+applyMotion();
+
+/* ===================== 倒數 ===================== */
+const DEPART = new Date('2026-12-13T08:45:00+08:00');
+const RETURN = new Date('2026-12-18T19:40:00+08:00');
+const pad = n => String(n).padStart(2,'0');
+function tick(){
+  const now = new Date();
+  let diff = DEPART - now;
+  if (diff > 0){
+    const d = Math.floor(diff/864e5), h = Math.floor(diff/36e5)%24, m = Math.floor(diff/6e4)%60, s = Math.floor(diff/1e3)%60;
+    $('#cdD').textContent = d; $('#cdH').textContent = pad(h); $('#cdM').textContent = pad(m); $('#cdS').textContent = pad(s);
+    $('#cdMsg').textContent = d === 0 ? '今日出發！記得帶護照～' : '距離 CX512 起飛還有';
+  } else {
+    ['#cdD','#cdH','#cdM','#cdS'].forEach(id => $(id).textContent = '00');
+    $('#cdMsg').textContent = now < RETURN ? '旅程進行中，玩得開心！' : '歡迎回家，下次再去福岡～';
+  }
+}
+tick(); setInterval(tick, 1000);
+
+/* ===================== 每日行程 ===================== */
+function tagHTML([type, label]){
+  const d = TAG[type];
+  return `<span class="tag ${d.c}"><svg aria-hidden="true"><use href="#${d.i}"/></svg>${esc(label)}</span>`;
+}
+function itemHTML(it, idx){
+  const tags = (it.tags || []).map(tagHTML).join('') + (it.cost ? `<span class="tag cost">${esc(it.cost)}</span>` : '');
+  return `<li class="tl k-${it.k}${it.must ? ' must' : ''} bounce-in" style="animation-delay:${Math.min(idx,10)*45}ms">
+    <div class="tl-time">${esc(it.s)}${it.e ? `<small>${esc(it.e)}</small>` : ''}</div>
+    <div class="tl-dot" aria-hidden="true"></div>
+    <div class="tl-card">
+      <div class="tl-title"><h4>${esc(it.t)}</h4>${it.must ? `<span class="must-badge"><svg aria-hidden="true"><use href="#i-star"/></svg>必去</span>` : ''}</div>
+      ${tags ? `<div class="tags">${tags}</div>` : ''}
+      ${it.note ? `<p class="tl-note">${esc(it.note)}</p>` : ''}
+      ${it.list ? `<ul class="tl-list">${it.list.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+      ${it.alt ? `<details class="alt"><summary>備選班次 ${it.alt.length}</summary><ul>${it.alt.map(x => `<li>${esc(x)}</li>`).join('')}</ul></details>` : ''}
+    </div>
+  </li>`;
+}
+function renderDay(i, animate){
+  const d = DAYS[i];
+  document.querySelectorAll('.day-tab').forEach((b, j) => {
+    b.setAttribute('aria-selected', j === i ? 'true' : 'false');
+    b.tabIndex = j === i ? 0 : -1;
+  });
+  const panel = $('#dayPanel');
+  panel.setAttribute('aria-labelledby', 'tab-' + i);
+  panel.innerHTML = `
+    <div class="card day-head ${animate ? 'bounce-in' : ''}">
+      <svg class="day-art" viewBox="0 0 320 110" role="img" aria-label="Day ${i+1} 插圖：${esc(d.title)}">${ART[d.art]}</svg>
+      <div class="day-head-body">
+        <span class="chip" style="background:var(--yama-l)">Day ${i+1}・${d.date}（${d.dow}）</span>
+        <h3 style="margin-top:6px">${esc(d.title)}</h3>
+        <p>${esc(d.sub)}</p>
+      </div>
+    </div>
+    <div class="legend" aria-label="圖例">
+      <span><i style="background:var(--mizu)"></i>交通</span><span><i style="background:var(--take)"></i>景點</span>
+      <span><i style="background:var(--coral)"></i>餐飲</span><span><i style="background:var(--yama)"></i>購物</span>
+      <span><i style="background:var(--paper)"></i>休息</span>
+    </div>
+    <ol class="timeline">${d.items.map(itemHTML).join('')}</ol>`;
+  if (!animate) panel.querySelectorAll('.bounce-in').forEach(el => el.classList.remove('bounce-in'));
+}
+function buildTabs(){
+  const wrap = $('#dayTabs');
+  wrap.innerHTML = DAYS.map((d, i) => `<button class="day-tab" role="tab" id="tab-${i}" aria-controls="dayPanel" type="button" data-i="${i}">
+    <span class="d">Day ${i+1}</span><span class="n">${d.date}</span><span class="w">（${d.dow}）</span></button>`).join('');
+  wrap.addEventListener('click', e => {
+    const b = e.target.closest('.day-tab'); if (!b) return;
+    select(+b.dataset.i, true);
+  });
+  wrap.addEventListener('keydown', e => {
+    const cur = [...wrap.children].findIndex(b => b.getAttribute('aria-selected') === 'true');
+    let n = null;
+    if (e.key === 'ArrowRight') n = Math.min(cur+1, DAYS.length-1);
+    if (e.key === 'ArrowLeft') n = Math.max(cur-1, 0);
+    if (n !== null){ e.preventDefault(); select(n, true); wrap.children[n].focus(); }
+  });
+}
+function select(i, animate){
+  renderDay(i, animate);
+  const b = $('#tab-' + i);
+  b.classList.remove('boing'); void b.offsetWidth; b.classList.add('boing');
+  b.scrollIntoView({block:'nearest', inline:'center', behavior: isReduced() ? 'auto' : 'smooth'});
+  try { sessionStorage.setItem('fuk2026-day', i); } catch(e) {}
+}
+buildTabs();
+const tripDayIndex = () => {
+  const now = new Date();
+  const jp = new Date(now.getTime() + (now.getTimezoneOffset() + 540) * 6e4);
+  return (jp.getFullYear() === 2026 && jp.getMonth() === 11 && jp.getDate() >= 13 && jp.getDate() <= 18) ? jp.getDate() - 13 : -1;
+};
+(function initDay(){
+  let idx = tripDayIndex();
+  if (idx < 0){ idx = 0; try { const s = sessionStorage.getItem('fuk2026-day'); if (s !== null) idx = +s; } catch(e) {} }
+  renderDay(idx, false);
+})();
+
+/* ===================== 打勾清單 ===================== */
+const listUpdaters = [];
+function renderChecklist(el, data, title, color){
+  const all = data.flatMap(g => g.items);
+  all.forEach(it => { if (it.def && !(it.id in checks)) checks[it.id] = true; });
+  el.innerHTML = `<div class="card list-card" style="background:${color}">
+    <div class="list-head"><h3>${title}</h3><span class="chip count"></span></div>
+    <div class="progress" aria-hidden="true"><i></i></div>
+    ${data.map(g => `<div class="group-title">${esc(g.g)}</div><ul class="checks">${g.items.map(it => `
+      <li><label class="check"><input type="checkbox" data-id="${it.id}" ${checks[it.id] ? 'checked' : ''}>
+        <span class="box"><svg aria-hidden="true"><use href="#i-tick"/></svg></span>
+        <span class="txt">${esc(it.t)}${it.s ? `<small>${esc(it.s)}</small>` : ''}</span></label></li>`).join('')}</ul>`).join('')}
+    <div style="text-align:right;margin-top:8px"><button class="reset" type="button">全部清除</button></div>
+  </div>`;
+  const update = () => {
+    const done = all.filter(it => checks[it.id]).length;
+    el.querySelector('.count').textContent = `${done} / ${all.length}`;
+    el.querySelector('.progress i').style.width = (done / all.length * 100) + '%';
+  };
+  el.addEventListener('change', e => {
+    const id = e.target.dataset.id; if (!id) return;
+    checks[id] = e.target.checked; saveChecks(); update();
+    cloud('kv', {pairs:[['chk:' + id, e.target.checked ? '1' : '0']]});
+  });
+  el.querySelector('.reset').addEventListener('click', () => {
+    if (!confirm('確定清除「' + title + '」所有打勾？')) return;
+    all.forEach(it => { checks[it.id] = false; });
+    el.querySelectorAll('input').forEach(i => i.checked = false);
+    saveChecks(); update();
+    cloud('kv', {pairs:all.map(it => ['chk:' + it.id, '0'])});
+  });
+  listUpdaters.push(() => { el.querySelectorAll('input[data-id]').forEach(i => i.checked = !!checks[i.dataset.id]); update(); });
+  update();
+}
+renderChecklist($('#todoList'), TODO, '旅程待辦', 'var(--coral-l)');
+renderChecklist($('#prepList'), PREP, '出發前要做', 'var(--yama-l)');
+renderChecklist($('#bagList'), BAG, '執行李', 'var(--mizu-l)');
+saveChecks();
+
+/* ===================== 旅費記帳 ===================== */
+const CATS = [
+  {k:'food',n:'餐飲',c:'#F2A497'},{k:'move',n:'交通',c:'#A8D3E6'},{k:'shop',n:'購物',c:'#F6D27A'},
+  {k:'fun',n:'門票',c:'#B9DAA5'},{k:'stay',n:'住宿',c:'#CFC3E8'},{k:'other',n:'其他',c:'#FFFCF6'}
+];
+const CAT = Object.fromEntries(CATS.map(c => [c.k, c]));
+const EXP_DAYS = [...DAYS.map((d, i) => ({v:String(i), n:`Day ${i+1}・${d.date}（${d.dow}）`, s:`${d.date}（${d.dow}）`})), {v:'pre', n:'出發前', s:'出發前'}];
+const DAY_NAME = Object.fromEntries(EXP_DAYS.map(d => [d.v, d.s]));
+const EXP_KEY = 'fuk2026-expense';
+let ex = {people:['我'], rate:0.052, items:[]};
+try { const s = JSON.parse(localStorage.getItem(EXP_KEY)); if (s && Array.isArray(s.items)) ex = Object.assign(ex, s); } catch(e) {}
+const saveEx = () => { try { localStorage.setItem(EXP_KEY, JSON.stringify(ex)); } catch(e) {} };
+let editId = null;
+
+const yen = n => (Math.round(n) < 0 ? '-¥' : '¥') + Math.abs(Math.round(n)).toLocaleString('en-US');
+const hkd = n => 'HK$' + (Math.round(n * 10) / 10).toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:1});
+const toJPY = it => it.cur === 'HKD' ? (ex.rate > 0 ? it.amt / ex.rate : 0) : it.amt;
+const fmtOrig = it => it.cur === 'HKD' ? hkd(it.amt) : yen(it.amt);
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('show'), 2200); }
+
+/* ---- 表單 ---- */
+function buildForm(){
+  $('#fDay').innerHTML = EXP_DAYS.map(d => `<option value="${d.v}">${d.n}</option>`).join('');
+  const di = tripDayIndex(); $('#fDay').value = di >= 0 ? String(di) : '0';
+  $('#fCats').innerHTML = CATS.map((c, i) => `<label class="pill" style="--c:${c.c}"><input type="radio" name="fCat" value="${c.k}" ${i === 0 ? 'checked' : ''}><span>${c.n}</span></label>`).join('');
+}
+function fillPeople(keepSplit){
+  const payer = $('#fPayer').value;
+  $('#fPayer').innerHTML = ex.people.map(p => `<option>${esc(p)}</option>`).join('');
+  if (ex.people.includes(payer)) $('#fPayer').value = payer;
+  const prev = keepSplit ? [...document.querySelectorAll('#fSplit input:checked')].map(i => i.value) : ex.people;
+  $('#fSplit').innerHTML = ex.people.map(p => `<label class="pill"><input type="checkbox" value="${esc(p)}" ${prev.includes(p) ? 'checked' : ''}><span>${esc(p)}</span></label>`).join('');
+  $('#peopleCount').textContent = ex.people.length + ' 人';
+  $('#peopleList').innerHTML = ex.people.map((p, i) => `<span class="person">${esc(p)}<button type="button" data-i="${i}" aria-label="移除 ${esc(p)}">×</button></span>`).join('');
+}
+function resetForm(){
+  editId = null;
+  $('#expForm').reset();
+  const di = tripDayIndex(); $('#fDay').value = di >= 0 ? String(di) : $('#fDay').value || '0';
+  document.querySelector('input[name=fCat]').checked = true;
+  document.querySelectorAll('#fSplit input').forEach(i => i.checked = true);
+  $('#expFormTitle').textContent = '新增一筆'; $('#fSubmit').textContent = '加入';
+  $('#fCancel').hidden = $('#fDelete').hidden = true;
+  document.querySelectorAll('.exp-item.editing').forEach(e => e.classList.remove('editing'));
+}
+function startEdit(id){
+  const it = ex.items.find(x => x.id === id); if (!it) return;
+  editId = id;
+  $('#fDay').value = it.day; $('#fTitle').value = it.t; $('#fAmt').value = it.amt; $('#fCur').value = it.cur;
+  if (ex.people.includes(it.payer)) $('#fPayer').value = it.payer;
+  const r = document.querySelector(`input[name=fCat][value="${it.cat}"]`); if (r) r.checked = true;
+  document.querySelectorAll('#fSplit input').forEach(i => i.checked = it.split.includes(i.value));
+  $('#expFormTitle').textContent = '修改紀錄'; $('#fSubmit').textContent = '儲存';
+  $('#fCancel').hidden = $('#fDelete').hidden = false;
+  const card = $('#expFormCard');
+  card.scrollIntoView({block:'start', behavior: isReduced() ? 'auto' : 'smooth'});
+  card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+  renderExp();
+}
+$('#expForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const amt = parseFloat($('#fAmt').value);
+  const split = [...document.querySelectorAll('#fSplit input:checked')].map(i => i.value);
+  if (!(amt > 0)) return toast('請輸入金額');
+  if (!split.length) return toast('請揀至少一個分攤的人');
+  const data = {day:$('#fDay').value, t:$('#fTitle').value.trim() || '未命名', amt, cur:$('#fCur').value,
+    cat:(document.querySelector('input[name=fCat]:checked') || {}).value || 'other', payer:$('#fPayer').value, split};
+  let item = editId && ex.items.find(x => x.id === editId);
+  if (item){ Object.assign(item, data); toast('已更新'); }
+  else { item = Object.assign({id:uid()}, data); ex.items.push(item); toast('已加入 ' + fmtOrig(data)); }
+  saveEx(); cloud('upsert', {items:[item]}); resetForm(); renderExp();
+});
+$('#fCancel').addEventListener('click', () => { resetForm(); renderExp(); });
+$('#fDelete').addEventListener('click', () => {
+  if (!editId || !confirm('確定刪除這筆紀錄？')) return;
+  const did = editId; ex.items = ex.items.filter(x => x.id !== did); saveEx(); cloud('del', {id:did}); resetForm(); renderExp(); toast('已刪除');
+});
+
+/* ---- 成員 ---- */
+$('#addPerson').addEventListener('submit', e => {
+  e.preventDefault();
+  const n = $('#newPerson').value.trim();
+  if (!n) return;
+  if (ex.people.includes(n)) return toast('已經有 ' + n);
+  ex.people.push(n); $('#newPerson').value = '';
+  saveEx(); syncPeople(); fillPeople(true);
+  const box = document.querySelector(`#fSplit input[value="${CSS.escape(n)}"]`); if (box && !editId) box.checked = true;
+  renderExp();
+});
+$('#peopleList').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const p = ex.people[+b.dataset.i];
+  if (ex.items.some(it => it.payer === p || it.split.includes(p))) return toast(p + ' 已有記帳紀錄，不能移除');
+  if (ex.people.length === 1) return toast('至少要有一位成員');
+  ex.people.splice(+b.dataset.i, 1); saveEx(); syncPeople(); fillPeople(true); renderExp();
+});
+
+/* ---- 匯率 ---- */
+$('#expRate').value = ex.rate;
+$('#expRate').addEventListener('input', () => {
+  const v = parseFloat($('#expRate').value);
+  if (v > 0){ ex.rate = v; saveEx(); renderExp(); clearTimeout(window._rt); window._rt = setTimeout(() => cloud('kv', {pairs:[['rate', String(ex.rate)]]}), 800); }
+});
+
+/* ---- 計算 ---- */
+function balances(){
+  const b = Object.fromEntries(ex.people.map(p => [p, {paid:0, share:0}]));
+  ex.items.forEach(it => {
+    const v = toJPY(it);
+    if (!b[it.payer]) b[it.payer] = {paid:0, share:0};
+    b[it.payer].paid += v;
+    it.split.forEach(p => { if (!b[p]) b[p] = {paid:0, share:0}; b[p].share += v / it.split.length; });
+  });
+  return b;
+}
+function transfers(b){
+  const cred = [], debt = [];
+  Object.entries(b).forEach(([p, x]) => { const n = x.paid - x.share; if (n > 0.5) cred.push([p, n]); else if (n < -0.5) debt.push([p, -n]); });
+  cred.sort((a, c) => c[1] - a[1]); debt.sort((a, c) => c[1] - a[1]);
+  const out = []; let i = 0, j = 0;
+  while (i < debt.length && j < cred.length){
+    const m = Math.min(debt[i][1], cred[j][1]);
+    out.push({from:debt[i][0], to:cred[j][0], amt:m});
+    debt[i][1] -= m; cred[j][1] -= m;
+    if (debt[i][1] < 0.5) i++; if (cred[j][1] < 0.5) j++;
+  }
+  return out;
+}
+
+/* ---- 顯示 ---- */
+function renderExp(){
+  const total = ex.items.reduce((s, it) => s + toJPY(it), 0);
+  $('#expTotal').textContent = yen(total);
+  $('#expTotalHkd').textContent = '≈ ' + hkd(total * ex.rate) + (ex.people.length > 1 ? `・每人平均 ${yen(total / ex.people.length)}` : '');
+  const byCat = Object.fromEntries(CATS.map(c => [c.k, 0]));
+  ex.items.forEach(it => byCat[it.cat] = (byCat[it.cat] || 0) + toJPY(it));
+  const max = Math.max(1, ...Object.values(byCat));
+  $('#expCats').innerHTML = CATS.map(c => `<div class="cat-bar"><span>${c.n}</span><span class="track"><i style="width:${byCat[c.k] / max * 100}%;background:${c.c}" ${byCat[c.k] ? '' : 'data-z'}></i></span><b>${yen(byCat[c.k])}</b></div>`).join('');
+
+  $('#expCount').textContent = ex.items.length + ' 筆';
+  if (!ex.items.length){
+    $('#expList').innerHTML = `<div class="empty">仲未有紀錄～<br>喺上面輸入第一筆支出吧！</div>`;
+  } else {
+    const order = EXP_DAYS.map(d => d.v);
+    const groups = {};
+    ex.items.forEach(it => (groups[it.day] = groups[it.day] || []).push(it));
+    const keys = Object.keys(groups).sort((a, b) => (a === 'pre' ? -1 : order.indexOf(a)) - (b === 'pre' ? -1 : order.indexOf(b)));
+    $('#expList').innerHTML = keys.map(k => {
+      const sum = groups[k].reduce((s, it) => s + toJPY(it), 0);
+      return `<div class="exp-day"><span>${esc(DAY_NAME[k] || k)}</span><span>${yen(sum)}</span></div>
+      <ul class="exp-list">${groups[k].map(it => {
+        const c = CAT[it.cat] || CAT.other;
+        const who = it.split.length === ex.people.length && ex.people.length > 1 ? '全部人' : it.split.join('、');
+        return `<li><button type="button" class="exp-item${it.id === editId ? ' editing' : ''}" data-id="${it.id}" aria-label="修改 ${esc(it.t)}">
+          <span class="ic" style="background:${c.c}">${c.n}</span>
+          <span class="nm">${esc(it.t)}<small>${esc(it.payer)} 付・${esc(who)} 分</small></span>
+          <span class="am">${fmtOrig(it)}${it.cur === 'HKD' ? `<small>≈ ${yen(toJPY(it))}</small>` : `<small>≈ ${hkd(it.amt * ex.rate)}</small>`}</span>
+        </button></li>`; }).join('')}</ul>`;
+    }).join('');
+  }
+
+  const b = balances();
+  const tr = transfers(b);
+  $('#settle').innerHTML = `<table class="settle-table"><thead><tr><th>成員</th><th>已付</th><th>應付</th><th>差額</th></tr></thead><tbody>
+    ${Object.entries(b).map(([p, x]) => { const n = x.paid - x.share; return `<tr><td>${esc(p)}</td><td>${yen(x.paid)}</td><td>${yen(x.share)}</td><td class="${n > 0.5 ? 'pos' : n < -0.5 ? 'neg' : ''}">${n > 0.5 ? '+' : ''}${yen(n)}</td></tr>`; }).join('')}
+  </tbody></table>
+  ${tr.length ? tr.map(t => `<div class="transfer">${esc(t.from)} → ${esc(t.to)}<b>${yen(t.amt)}<small style="opacity:.7">（≈ ${hkd(t.amt * ex.rate)}）</small></b></div>`).join('')
+    : `<div class="empty">${ex.people.length > 1 ? '目前互不相欠 ✿' : '加入同行者後，會自動計算誰要俾誰'}</div>`}`;
+}
+$('#expList').addEventListener('click', e => { const b = e.target.closest('.exp-item'); if (b) startEdit(b.dataset.id); });
+
+/* ---- 分享：文字摘要 ---- */
+function summaryText(){
+  const total = ex.items.reduce((s, it) => s + toJPY(it), 0);
+  const L = [`🧾 福岡之旅 旅費（12/13–12/18）`, `總支出：${yen(total)}（≈ ${hkd(total * ex.rate)}，匯率 ${ex.rate}）`, `成員：${ex.people.join('、')}`, ''];
+  const b = balances();
+  L.push('【每人】');
+  Object.entries(b).forEach(([p, x]) => L.push(`${p}：已付 ${yen(x.paid)}／應付 ${yen(x.share)}`));
+  const tr = transfers(b);
+  L.push('', '【誰要俾誰】');
+  if (tr.length) tr.forEach(t => L.push(`${t.from} → ${t.to}：${yen(t.amt)}（≈ ${hkd(t.amt * ex.rate)}）`)); else L.push('互不相欠');
+  L.push('', '【明細】');
+  EXP_DAYS.forEach(d => {
+    const its = ex.items.filter(it => it.day === d.v); if (!its.length) return;
+    L.push(d.s);
+    its.forEach(it => L.push(`・${it.t} ${fmtOrig(it)}（${it.payer} 付）`));
+  });
+  return L.join('\n');
+}
+async function shareOrCopy(text, title, okMsg){
+  if (navigator.share){
+    try { await navigator.share({title, text}); return; } catch(e) { if (e.name === 'AbortError') return; }
+  }
+  try { await navigator.clipboard.writeText(text); toast(okMsg); }
+  catch(e) { $('#importBox').value = text; $('#importBox').select(); toast('請手動複製下方文字'); }
+}
+$('#shareText').addEventListener('click', () => {
+  if (!ex.items.length) return toast('仲未有紀錄');
+  shareOrCopy(summaryText(), '福岡之旅 旅費', '已複製摘要，可以貼到 WhatsApp');
+});
+
+/* ---- 分享：記帳碼（壓縮＋base64）---- */
+const b64e = u8 => { let s = ''; u8.forEach(c => s += String.fromCharCode(c)); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
+const b64d = s => { s = s.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '='; return Uint8Array.from(atob(s), c => c.charCodeAt(0)); };
+async function pipe(u8, Stream){ return new Uint8Array(await new Response(new Blob([u8]).stream().pipeThrough(Stream)).arrayBuffer()); }
+async function encodeEx(){
+  const P = ex.people;
+  const data = {v:1, p:P, r:ex.rate, e:ex.items.map(it => [it.id, it.day, it.t, it.amt, it.cur === 'HKD' ? 1 : 0, it.cat, it.payer, it.split])};
+  const raw = new TextEncoder().encode(JSON.stringify(data));
+  if (window.CompressionStream){ try { return 'FUK1Z' + b64e(await pipe(raw, new CompressionStream('deflate-raw'))); } catch(e) {} }
+  return 'FUK1J' + b64e(raw);
+}
+async function decodeEx(code){
+  code = code.trim().replace(/\s+/g, '');
+  const m = code.match(/FUK1([ZJ])([A-Za-z0-9_-]+)/);
+  if (!m) throw new Error('格式不正確');
+  let u8 = b64d(m[2]);
+  if (m[1] === 'Z'){
+    if (!window.DecompressionStream) throw new Error('這個瀏覽器太舊，未能解壓');
+    u8 = await pipe(u8, new DecompressionStream('deflate-raw'));
+  }
+  const d = JSON.parse(new TextDecoder().decode(u8));
+  return {people:d.p, rate:d.r, items:d.e.map(a => ({id:a[0], day:a[1], t:a[2], amt:a[3], cur:a[4] ? 'HKD' : 'JPY', cat:a[5], payer:a[6], split:a[7]}))};
+}
+$('#shareCode').addEventListener('click', async () => {
+  if (!ex.items.length) return toast('仲未有紀錄');
+  const code = await encodeEx();
+  shareOrCopy(`福岡之旅記帳碼（打開旅遊網頁 → 記帳 → 匯入記帳碼，貼上整段）：\n${code}`, '福岡之旅記帳碼', '已複製記帳碼');
+});
+async function doImport(mode){
+  const txt = $('#importBox').value;
+  if (!txt.trim()) return toast('請先貼上記帳碼');
+  let d;
+  try { d = await decodeEx(txt); } catch(e) { return toast('讀唔到記帳碼：' + e.message); }
+  if (mode === 'replace'){
+    if (!confirm(`用對方的 ${d.items.length} 筆紀錄取代你現有的 ${ex.items.length} 筆？`)) return;
+    ex = {people:d.people, rate:d.rate || ex.rate, items:d.items};
+  } else {
+    d.people.forEach(p => { if (!ex.people.includes(p)) ex.people.push(p); });
+    const map = new Map(ex.items.map(it => [it.id, it]));
+    let add = 0;
+    d.items.forEach(it => { if (!map.has(it.id)) add++; map.set(it.id, it); });
+    ex.items = [...map.values()];
+    toast(`已合併：新增 ${add} 筆，更新 ${d.items.length - add} 筆`);
+  }
+  [...ex.items.flatMap(it => [it.payer, ...it.split])].forEach(p => { if (!ex.people.includes(p)) ex.people.push(p); });
+  saveEx(); cloud(mode === 'replace' ? 'replace' : 'bulk', {items: mode === 'replace' ? ex.items : d.items}); syncPeople(); $('#importBox').value = ''; $('#expRate').value = ex.rate;
+  fillPeople(false); resetForm(); renderExp();
+  if (mode === 'replace') toast('已匯入 ' + ex.items.length + ' 筆');
+}
+$('#importMerge').addEventListener('click', () => doImport('merge'));
+$('#importReplace').addEventListener('click', () => doImport('replace'));
+
+/* ---- CSV（Excel 可開）---- */
+$('#dlCsv').addEventListener('click', () => {
+  if (!ex.items.length) return toast('仲未有紀錄');
+  const q = v => `"${String(v).replace(/"/g, '""')}"`;
+  const rows = [['日期','項目','類別','金額','貨幣','折合日圓','折合港幣','付款人','分攤人數','分攤給']];
+  const order = EXP_DAYS.map(d => d.v);
+  [...ex.items].sort((a, b) => order.indexOf(a.day) - order.indexOf(b.day)).forEach(it => {
+    const j = toJPY(it);
+    rows.push([DAY_NAME[it.day] || it.day, it.t, (CAT[it.cat] || CAT.other).n, it.amt, it.cur, Math.round(j), (j * ex.rate).toFixed(1), it.payer, it.split.length, it.split.join('、')]);
+  });
+  rows.push([]);
+  rows.push(['成員','已付（日圓）','應付（日圓）','差額（日圓）']);
+  Object.entries(balances()).forEach(([p, x]) => rows.push([p, Math.round(x.paid), Math.round(x.share), Math.round(x.paid - x.share)]));
+  rows.push([]);
+  rows.push(['付款人','收款人','日圓','港幣']);
+  transfers(balances()).forEach(t => rows.push([t.from, t.to, Math.round(t.amt), (t.amt * ex.rate).toFixed(1)]));
+  rows.push([]); rows.push(['匯率 ¥1 = HK$', ex.rate]);
+  const csv = '\ufeff' + rows.map(r => r.map(q).join(',')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
+  a.download = '福岡之旅_旅費記帳.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+
+$('#expClear').addEventListener('click', () => {
+  if (!confirm('確定清除全部記帳紀錄？（成員名單會保留）')) return;
+  ex.items = []; saveEx(); cloud('clear'); resetForm(); renderExp();
+});
+
+buildForm(); fillPeople(false); resetForm(); renderExp();
+
+
+/* ===================== 雲端同步（Google 試算表） ===================== */
+// 如想所有人打開網頁就自動連線，可把 Apps Script 網址貼在下面引號內
+const SYNC_URL_DEFAULT = '';
+let SYNC_URL = SYNC_URL_DEFAULT;
+try { SYNC_URL = SYNC_URL_DEFAULT || localStorage.getItem('fuk2026-sync') || ''; } catch(e) {}
+let queue = [];
+try { queue = JSON.parse(localStorage.getItem('fuk2026-queue') || '[]'); } catch(e) {}
+const saveQ = () => { try { localStorage.setItem('fuk2026-queue', JSON.stringify(queue)); } catch(e) {} };
+let flushing = false;
+const hhmm = () => new Date().toTimeString().slice(0, 5);
+const withT = u => u + (u.includes('?') ? '&' : '?') + 't=' + Date.now();
+
+function setStatus(t, c){ const el = $('#syncStatus'); el.textContent = t; el.style.background = c || 'var(--paper)'; }
+function cloud(op, data){ if (!SYNC_URL) return; queue.push(Object.assign({op}, data || {})); saveQ(); flush(); }
+function syncPeople(){ cloud('kv', {pairs:[['people', JSON.stringify(ex.people)]]}); }
+
+async function flush(){
+  if (!SYNC_URL || flushing) return;
+  flushing = true;
+  try {
+    while (queue.length){
+      setStatus('同步中…', 'var(--yama-l)');
+      const r = await fetch(SYNC_URL, {method:'POST', body:JSON.stringify(queue[0])});
+      const d = await r.json();
+      if (d.error) throw new Error(d.error);
+      queue.shift(); saveQ();
+      if (!queue.length) applyRemote(d);
+    }
+    setStatus('☁ 已同步 ' + hhmm(), 'var(--take-l)');
+  } catch(e) {
+    setStatus('離線・' + queue.length + ' 項待上載', 'var(--coral-l)');
+  }
+  flushing = false;
+}
+async function pull(){
+  if (!SYNC_URL) return;
+  if (queue.length) return flush();
+  try {
+    const d = await (await fetch(withT(SYNC_URL))).json();
+    if (!d.ok) throw 0;
+    applyRemote(d);
+    setStatus('☁ 已同步 ' + hhmm(), 'var(--take-l)');
+  } catch(e) { setStatus('離線（用緊本機紀錄）', 'var(--coral-l)'); }
+}
+function applyRemote(d){
+  if (queue.length || !d || !d.ok) return;   // 未上載完就唔好覆蓋本機
+  ex.items = d.items;
+  if (d.kv.people){ try { ex.people = JSON.parse(d.kv.people); } catch(e) {} }
+  if (+d.kv.rate > 0) ex.rate = +d.kv.rate;
+  ex.items.forEach(it => [it.payer, ...it.split].forEach(p => { if (p && !ex.people.includes(p)) ex.people.push(p); }));
+  Object.keys(d.kv).forEach(k => { if (k.startsWith('chk:')) checks[k.slice(4)] = d.kv[k] === '1'; });
+  saveEx(); saveChecks();
+  if (document.activeElement !== $('#expRate')) $('#expRate').value = ex.rate;
+  if (editId && !ex.items.some(x => x.id === editId)) resetForm();
+  fillPeople(true); renderExp(); listUpdaters.forEach(f => f());
+}
+async function connect(url){
+  url = (url || '').trim();
+  if (!url){
+    SYNC_URL = ''; try { localStorage.removeItem('fuk2026-sync'); } catch(e) {}
+    setStatus('未連接'); toast('已中斷雲端同步'); return;
+  }
+  if (!/^(https:\/\/|http:\/\/(localhost|127\.0\.0\.1))/.test(url)) return toast('網址要以 https:// 開頭');
+  setStatus('連接中…', 'var(--yama-l)');
+  try {
+    const d = await (await fetch(withT(url))).json();
+    if (!d.ok) throw 0;
+    SYNC_URL = url; try { localStorage.setItem('fuk2026-sync', url); } catch(e) {}
+    $('#syncUrl').value = url;
+    const remoteEmpty = !d.items.length && !d.kv.people;
+    const localHas = ex.items.length || ex.people.length > 1 || Object.values(checks).some(Boolean);
+    if (remoteEmpty && localHas){
+      cloud('replace', {items:ex.items});
+      cloud('kv', {pairs:[['people', JSON.stringify(ex.people)], ['rate', String(ex.rate)], ...Object.entries(checks).map(([k, v]) => ['chk:' + k, v ? '1' : '0'])]});
+      toast('已連接，並把你的紀錄上載到雲端');
+    } else {
+      applyRemote(d); setStatus('☁ 已同步 ' + hhmm(), 'var(--take-l)'); toast('已連接雲端');
+    }
+  } catch(e) {
+    setStatus('連接失敗', 'var(--coral-l)'); toast('連接失敗，請檢查網址及部署設定');
+  }
+}
+$('#syncUrl').value = SYNC_URL;
+$('#syncSave').addEventListener('click', () => connect($('#syncUrl').value));
+$('#syncNow').addEventListener('click', () => SYNC_URL ? pull() : toast('請先貼上網址並連接'));
+$('#syncInvite').addEventListener('click', () => {
+  if (!SYNC_URL) return toast('請先連接雲端');
+  if (location.protocol === 'file:') return toast('請先把網頁放上網，邀請連結先用得到');
+  shareOrCopy('福岡之旅（一齊記帳、打勾）：\n' + location.href.split('#')[0] + '#sync=' + encodeURIComponent(SYNC_URL), '福岡之旅', '已複製邀請連結');
+});
+// 邀請連結：網址帶 #sync= 會自動連線
+if (location.hash.startsWith('#sync=')){
+  const u = decodeURIComponent(location.hash.slice(6));
+  history.replaceState(null, '', location.pathname + location.search);
+  connect(u);
+} else if (SYNC_URL){ setStatus('連接中…', 'var(--yama-l)'); pull(); }
+setInterval(() => { if (document.visibilityState === 'visible') pull(); }, 20000);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') pull(); });
+window.addEventListener('online', flush);
+
+/* ===================== 選單高亮 ===================== */
+const links = [...document.querySelectorAll('.nav-links a')];
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    links.forEach(a => {
+      const on = a.getAttribute('href') === '#' + en.target.id;
+      a.classList.toggle('on', on);
+      if (on) a.scrollIntoView({block:'nearest', inline:'nearest', behavior: isReduced() ? 'auto' : 'smooth'});
+    });
+  });
+}, {rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section[id]').forEach(s => spy.observe(s));
+</script>
+</body>
+</html>
